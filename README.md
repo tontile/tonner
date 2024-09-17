@@ -1,3 +1,7 @@
+<img src="https://img.shields.io/badge/Current Status:%20-000.svg"><img src="https://img.shields.io/badge/Move%20fast%20and%20break%20things-red.svg">
+
+We are under heavy development.
+
 ## What's included
 
 [Next.js](https://nextjs.org/) - Framework<br>
