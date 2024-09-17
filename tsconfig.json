@@ -1,0 +1,3 @@
+{
+  "extends": "@tonner/typescript/base.json"
+}
