@@ -1,4 +1,5 @@
 import { ArchiveIcon } from "@radix-ui/react-icons";
+import { LogOut } from "lucide-react";
 import { FaDiagramProject, FaXTwitter } from "react-icons/fa6";
 import { FiGithub } from "react-icons/fi";
 import {
@@ -606,4 +607,5 @@ export const Icons = {
   Menu: MdMenu,
   Mute: MdOutlineVolumeOff,
   UnMute: MdOutlineVolumeUp,
+  SignOut: LogOut,
 };
