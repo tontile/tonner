@@ -1,6 +1,6 @@
 import { getPosts } from "@tonner/supabase/queries";
 
-export async function PostsServer() {
+export async function Posts() {
   const { data } = await getPosts();
 
   return (

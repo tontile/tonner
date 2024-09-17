@@ -1,8 +1,8 @@
 "use server";
 
-import { authActionClient } from "@/actions/safe-action";
+import { authActionClient } from "@/libs/safe-action";
 import { updateUser } from "@tonner/supabase/mutations";
-import { updateUserSchema } from "./schema";
+import { updateUserSchema } from "../schema";
 
 export const updateUserAction = authActionClient
   .schema(updateUserSchema)
