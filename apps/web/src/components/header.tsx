@@ -31,7 +31,7 @@ export function Header() {
           </li>
           <li>
             <a
-              href="https://t.me/tontile"
+              href="https://t.me/tonnerapp"
               className="text-sm px-4 py-2 bg-secondary text-primary rounded-full font-medium cursor-pointer"
             >
               Telegram
