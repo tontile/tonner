@@ -1,5 +1,5 @@
-import { PostsLoading } from "@/components/posts/posts.loading";
-import { PostsServer } from "@/components/posts/posts.server";
+import { Posts } from "@/modules/posts/components/posts";
+import { PostsLoading } from "@/modules/posts/components/posts-loading";
 import { Suspense } from "react";
 
 export const metadata = {
@@ -9,7 +9,7 @@ export const metadata = {
 export default function Page() {
   return (
     <Suspense fallback={<PostsLoading />}>
-      <PostsServer />
+      <Posts />
     </Suspense>
   );
 }
