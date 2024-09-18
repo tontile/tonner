@@ -24,6 +24,12 @@ export default async function Page() {
           <div className="mt-10 flex justify-center">
             <GetStarted />
           </div>
+          <span className="text-sm">
+            <p>
+              This mini-app is a part of <a href="https://tonner.io">Tonner</a>{" "}
+              Project
+            </p>
+          </span>
         </section>
       </div>
     </div>
