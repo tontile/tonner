@@ -1,11 +1,11 @@
 "use client";
 
-import { subscribeAction } from "@/actions/subscribe-action";
 import { Button } from "@tonner/ui/button";
 import { Icons } from "@tonner/ui/icons";
 import { Input } from "@tonner/ui/input";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
+import { subscribeAction } from "../actions/subscribe-action";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
