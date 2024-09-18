@@ -21,6 +21,7 @@
     "clean": {
       "cache": false
     },
+    "db:gen": { "env": ["PROJECT_ID"], "cache": false },
     "dev": {
       "inputs": ["$TURBO_DEFAULT$", ".env"],
       "persistent": true,

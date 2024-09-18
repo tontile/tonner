@@ -6,6 +6,8 @@
     "build": "turbo build",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo clean",
+    "db:gen": "turbo db:gen --filter=@tonner/supabase",
+    "db:gen:local": "turbo db:gen --filter=@tonner/api",
     "dev": "turbo dev --parallel",
     "dev:api": "turbo dev --filter=@tonner/api",
     "dev:twa": "turbo dev --filter=@tonner/twa",

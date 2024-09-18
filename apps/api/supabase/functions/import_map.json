@@ -1,9 +1,6 @@
 {
   "imports": {
-    "react-email/components": "npm:@react-email/components@0.0.24",
-    "react": "npm:react@18.3.1",
-    "resend": "npm:resend@4.0.0",
-    "standardwebhooks": "npm:standardwebhooks@1.0.0",
-    "@tonner/emails/*": "../../../../../packages/email/emails/*"
+    "supabase": "https://esm.sh/@supabase/supabase-js@2.45.0",
+    "grammy": "https://deno.land/x/grammy@v1.29.0/mod.ts"
   }
 }
