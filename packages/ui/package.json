@@ -44,6 +44,7 @@
     "./drawer": "./src/components/drawer.tsx",
     "./dropdown-menu": "./src/components/dropdown-menu.tsx",
     "./form": "./src/components/form.tsx",
+    "./form-card-layout": "./src/components/form-card-layout.tsx",
     "./globals.css": "./src/globals.css",
     "./hover-card": "./src/components/hover-card.tsx",
     "./icons": "./src/components/icons.tsx",

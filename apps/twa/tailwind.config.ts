@@ -1,23 +1,13 @@
+import baseConfig from "@tonner/ui/tailwind.config";
 import type { Config } from "tailwindcss";
-import defaultTheme from "tailwindcss/defaultTheme";
 
 export default {
   content: ["./src/**/*.{ts,tsx}", "../../packages/ui/src/**/*.{ts,tsx}"],
-  darkMode: ["class"],
+  presets: [baseConfig],
   theme: {
     screens: {
       xs: "475px",
-      ...defaultTheme.screens,
-    },
-    fontFamily: {
-      display: ["var(--font-display)", "sans-serif"],
-    },
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
+      ...baseConfig.theme.screens,
     },
     extend: {
       colors: {
@@ -42,26 +32,6 @@ export default {
         },
         subtitle: "hsl(var(--subtitle))",
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
 } satisfies Config;

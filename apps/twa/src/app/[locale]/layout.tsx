@@ -1,27 +1,32 @@
 import "@tonner/ui/globals.css";
-import { SDKProvider } from "@telegram-apps/sdk-react";
+
 import { cn } from "@tonner/ui/cn";
+import { Toaster } from "@tonner/ui/toaster";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
-import type { Metadata } from "next";
-import { ThemeProvider } from "next-themes";
+import type { Metadata, Viewport } from "next";
+import Script from "next/script";
+import "@/styles/globals.css";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Create tonner",
-  description: "Production ready Next.js app",
+  description: "Production ready Telegram mini-app",
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)" },
-    { media: "(prefers-color-scheme: dark)" },
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
 };
 
 export default function RootLayout({
   children,
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -30,18 +35,16 @@ export default function RootLayout({
           `${GeistSans.variable} ${GeistMono.variable}`,
           "antialiased",
         )}
+        suppressHydrationWarning
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SDKProvider>
-            <TelegramInit />
-            {children}
-          </SDKProvider>
-        </ThemeProvider>
+        <Script
+          src="https://telegram.org/js/telegram-web-app.js"
+          strategy="beforeInteractive"
+        />
+        <Providers locale={locale}>
+          <Toaster />
+          {children}
+        </Providers>
       </body>
     </html>
   );
