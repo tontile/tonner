@@ -13,8 +13,6 @@ export async function createUnstableCache<T>(
   enabled = true,
 ): Promise<T> {
   if (process.env.TONNER_CACHE === "true" && enabled) {
-    const cacheKey = [...keyParts].join(":");
-
     const cachedFn = unstable_cache(
       async () => {
         const result = await fn();
@@ -22,7 +20,7 @@ export async function createUnstableCache<T>(
         const serializedResult = stringify(result);
         return serializedResult;
       },
-      [cacheKey],
+      keyParts,
       options,
     );
 
