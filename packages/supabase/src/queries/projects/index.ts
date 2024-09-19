@@ -34,7 +34,7 @@ export async function getProjectQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data;
@@ -74,7 +74,7 @@ export async function getUserProjectsQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data ?? [];
@@ -114,7 +114,7 @@ export async function getProjectUsersQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data ?? [];
@@ -158,7 +158,7 @@ export async function getProjectUserQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data;
@@ -198,7 +198,7 @@ export async function getTeamProjectsQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data ?? [];
@@ -238,7 +238,7 @@ export async function getProjectTeamsQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data ?? [];

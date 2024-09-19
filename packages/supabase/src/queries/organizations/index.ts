@@ -11,7 +11,7 @@ export async function getOrganizationQuery(
   signal?: AbortSignal,
 ) {
   if (!organization_id) {
-    return null;
+    return;
   }
 
   let query = supabase
@@ -34,7 +34,7 @@ export async function getOrganizationQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data;
@@ -74,7 +74,7 @@ export async function getUserOrganizationsQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data ?? [];
@@ -116,7 +116,7 @@ export async function getOrganizationUsersQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data ?? [];
@@ -164,7 +164,7 @@ export async function getOrganizationUserQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data;

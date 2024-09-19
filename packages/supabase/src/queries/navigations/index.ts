@@ -35,7 +35,7 @@ export async function getNavigationsQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data ?? [];
@@ -80,7 +80,7 @@ export async function getNavigationQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data;

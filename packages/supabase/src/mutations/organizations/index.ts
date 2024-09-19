@@ -15,7 +15,7 @@ export async function createOrganization(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;
@@ -39,7 +39,7 @@ export async function updateOrganization(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;
@@ -64,7 +64,7 @@ export async function updateOrganizationUser(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;
@@ -90,7 +90,7 @@ export async function removeOrganizationUser(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;

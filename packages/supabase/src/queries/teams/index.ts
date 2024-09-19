@@ -34,7 +34,7 @@ export async function getTeamQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data;
@@ -71,7 +71,7 @@ export async function getUserTeamsQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data ?? [];
@@ -111,7 +111,7 @@ export async function getTeamUsersQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data ?? [];
@@ -155,7 +155,7 @@ export async function getTeamUserQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data;
@@ -175,14 +175,14 @@ export async function getCurrentUserTeamQuery(
   } = await supabase.auth.getSession();
 
   if (!session?.user) {
-    return null;
+    return;
   }
 
   const user_id = session.user.id;
   const team_id = session.user.app_metadata.team_id;
 
   if (!team_id) {
-    return null;
+    return;
   }
 
   return await getTeamUserQuery({ team_id, user_id }, supabase, signal);

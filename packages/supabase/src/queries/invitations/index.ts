@@ -38,7 +38,7 @@ export async function getOrganizationInvitesQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data ?? [];
@@ -88,7 +88,7 @@ export async function getTeamInvitesQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data ?? [];
@@ -136,7 +136,7 @@ export async function getProjectInvitesQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data ?? [];
@@ -183,7 +183,7 @@ export async function getUserInvitesQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data ?? [];

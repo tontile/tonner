@@ -66,7 +66,7 @@ export async function getTrackersQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return {
@@ -124,7 +124,7 @@ export async function getTrackerRecordsQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     const result = data?.reduce<{ [key: string]: (typeof data)[0][] }>(

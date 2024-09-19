@@ -18,7 +18,7 @@ export async function createUserInvite(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;
@@ -40,7 +40,7 @@ export async function acceptInviteByToken(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;
@@ -64,7 +64,7 @@ export async function deleteInvite(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;

@@ -35,7 +35,7 @@ export async function getUserQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data;

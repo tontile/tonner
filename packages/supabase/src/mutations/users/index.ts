@@ -14,7 +14,7 @@ export async function updateUser(params: UpdateUserParams, supabase: Client) {
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;

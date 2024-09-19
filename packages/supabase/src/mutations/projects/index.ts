@@ -18,7 +18,7 @@ export async function createProject(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;
@@ -42,7 +42,7 @@ export async function updateProject(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;
@@ -62,7 +62,7 @@ export async function deleteProject(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;
@@ -84,7 +84,7 @@ export async function updateProjectUser(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;
@@ -105,7 +105,7 @@ export async function removeProjectUser(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;
@@ -126,7 +126,7 @@ export async function removeProjectTeam(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;

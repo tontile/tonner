@@ -13,7 +13,7 @@ export async function createTeam(params: CreateTeamParams, supabase: Client) {
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;
@@ -34,7 +34,7 @@ export async function updateTeam(params: UpdateTeamParams, supabase: Client) {
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;
@@ -64,7 +64,7 @@ export async function updateTeamUser(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;
@@ -85,7 +85,7 @@ export async function removeTeamUser(
 
   if (error) {
     logger.error(error);
-    return null;
+    return;
   }
 
   return data;

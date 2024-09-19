@@ -37,7 +37,7 @@ export async function getUserAccountsQuery(
 
     if (error) {
       logger.error(error);
-      return null;
+      return;
     }
 
     return data;
