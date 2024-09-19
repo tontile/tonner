@@ -220,14 +220,10 @@ $$;
 GRANT EXECUTE ON FUNCTION public.get_account_invitations(app.valid_name) TO authenticated;
 
 CREATE OR REPLACE FUNCTION public.accept_invitation(lookup_invitation_token text)
-    RETURNS TABLE(
-        membership_role app.membership_role,
-        account_name app.valid_name,
-        partial_name app.valid_name)
+    RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
-    SET search_path = public,
-    app
+    SET search_path = public, app
     AS $$
 DECLARE
     lookup_account_name app.valid_name;
@@ -305,15 +301,15 @@ WHERE
         DELETE FROM public.invitations
         WHERE token = lookup_invitation_token
             AND invitation_type = 'one_time';
-        RETURN QUERY
-        SELECT
-            new_member_role,
-            target_account_name,
-            target_partial_name;
+        RETURN json_build_object('account_name', target_account_name, 'partial_name', target_partial_namem 'membership_role', new_member_role);
     ELSE
         RAISE EXCEPTION 'Invalid token';
     END IF;
+EXCEPTION
+    WHEN unique_violation THEN
+        RAISE EXCEPTION 'You are already a member of this account';
 END;
+
 $$;
 
 GRANT EXECUTE ON FUNCTION public.accept_invitation(text) TO authenticated;
