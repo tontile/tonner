@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS public.trackers(
 CREATE TABLE IF NOT EXISTS public.tasks(
     id uuid NOT NULL DEFAULT gen_random_uuid(),
     -- COLUMNS
-    project_name text NOT NULL REFERENCES public.projects(project_name) ON DELETE CASCADE,
+    project_id uuid NOT NULL REFERENCES public.projects(id) ON DELETE CASCADE,
     title text CHECK (LENGTH(description) <= 450),
     description text CHECK (LENGTH(description) <= 1024),
     task_status app.task_status DEFAULT 'backlog' ::app.task_status,
@@ -131,8 +131,6 @@ CREATE TABLE IF NOT EXISTS app.tracker_reports(
 -- Section - Indexs
 -------------------------------------------------------
 CREATE INDEX IF NOT EXISTS idx_trackers_project_name ON public.trackers(project_name);
-
-CREATE INDEX IF NOT EXISTS idx_tasks_project_name ON public.tasks(project_name);
 
 CREATE INDEX IF NOT EXISTS idx_tasks_assigned_id ON public.tasks(assigned_id);
 
@@ -255,7 +253,7 @@ GRANT DELETE ON public.trackers TO authenticated;
 
 ALTER TABLE public.tasks ENABLE ROW LEVEL SECURITY;
 
-GRANT INSERT (project_name, title, description, task_status, task_priority, assigned_id, due_date, public_metadata) ON public.tasks TO authenticated;
+GRANT INSERT (project_id, title, description, task_status, task_priority, assigned_id, due_date, public_metadata) ON public.tasks TO authenticated;
 
 GRANT UPDATE (title, description, task_status, task_priority, assigned_id, due_date, public_metadata) ON public.tasks TO authenticated;
 
@@ -303,29 +301,28 @@ CREATE POLICY trackers_select_policy ON public.trackers AS permissive
 
 CREATE POLICY tasks_insert_policy ON public.tasks AS permissive
     FOR INSERT TO authenticated
-        WITH CHECK (project_name IN (
+        WITH CHECK (project_id IN (
             SELECT
-                app.get_project_names_with_role(auth.uid(), 'write')));
+                app.get_project_ids_with_role(auth.uid(), 'write')));
 
 CREATE POLICY tasks_update_policy ON public.tasks AS permissive
     FOR UPDATE TO authenticated
         USING (auth.uid() = assigned_id
-            OR project_name IN (
+            OR project_id IN (
                 SELECT
-                    app.get_project_names_with_role(auth.uid(), 'write')));
+                    app.get_project_ids_with_role(auth.uid(), 'write')));
 
 CREATE POLICY tasks_delete_policy ON public.tasks AS permissive
     FOR DELETE TO authenticated
-        USING (project_name IN (
+        USING (project_id IN (
             SELECT
-                app.get_project_names_with_role(auth.uid(), 'owner')));
+                app.get_project_ids_with_role(auth.uid(), 'write')));
 
 CREATE POLICY tasks_select_policy ON public.tasks AS permissive
     FOR SELECT TO authenticated
-        USING (auth.uid() = assigned_id
-            OR project_name IN (
-                SELECT
-                    app.get_project_names_with_role(auth.uid())));
+        USING (project_id IN (
+            SELECT
+                app.get_project_ids_with_role(auth.uid())));
 
 CREATE POLICY tracker_entries_insert_policy ON public.tracker_entries AS permissive
     FOR INSERT TO authenticated
@@ -412,7 +409,7 @@ CREATE OR REPLACE VIEW public.v_tasks WITH ( security_invoker = TRUE
 ) AS
 SELECT
     t.id,
-    t.project_name,
+    t.project_id,
     t.title,
     t.description,
     t.task_status,

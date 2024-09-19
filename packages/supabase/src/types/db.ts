@@ -760,7 +760,7 @@ export type Database = {
           due_date: string | null
           id: string
           private_metadata: Json | null
-          project_name: string
+          project_id: string
           public_metadata: Json | null
           task_priority: "low" | "medium" | "high" | "urgent" | "none" | null
           task_status:
@@ -782,7 +782,7 @@ export type Database = {
           due_date?: string | null
           id?: string
           private_metadata?: Json | null
-          project_name: string
+          project_id: string
           public_metadata?: Json | null
           task_priority?: "low" | "medium" | "high" | "urgent" | "none" | null
           task_status?:
@@ -804,7 +804,7 @@ export type Database = {
           due_date?: string | null
           id?: string
           private_metadata?: Json | null
-          project_name?: string
+          project_id?: string
           public_metadata?: Json | null
           task_priority?: "low" | "medium" | "high" | "urgent" | "none" | null
           task_status?:
@@ -911,74 +911,81 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "projects"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_invitations"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_organization_invites"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_project_invites"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "v_project_members"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_project_teams"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_projects"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_team_invites"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_team_projects"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_trackers"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_user_projects"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["project_id"]
           },
           {
             foreignKeyName: "tasks_updated_by_fkey"
@@ -2633,7 +2640,7 @@ export type Database = {
           description: string | null
           due_date: string | null
           id: string | null
-          project_name: string | null
+          project_id: string | null
           public_metadata: Json | null
           task_priority: "low" | "medium" | "high" | "urgent" | "none" | null
           task_status:
@@ -2738,74 +2745,81 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "projects"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_invitations"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_organization_invites"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_project_invites"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "v_project_members"
+            referencedColumns: ["project_id"]
+          },
+          {
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_project_teams"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_projects"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_team_invites"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_team_projects"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_trackers"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "tasks_project_name_fkey"
-            columns: ["project_name"]
+            foreignKeyName: "tasks_project_id_fkey"
+            columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "v_user_projects"
-            referencedColumns: ["project_name"]
+            referencedColumns: ["project_id"]
           },
         ]
       }
