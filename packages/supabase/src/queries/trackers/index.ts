@@ -77,7 +77,6 @@ export async function getTrackersQuery(
     };
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -151,7 +150,6 @@ export async function getTrackerRecordsQuery(
     };
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 

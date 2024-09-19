@@ -40,7 +40,6 @@ export async function getProjectQuery(
     return data;
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -81,7 +80,6 @@ export async function getUserProjectsQuery(
     return data ?? [];
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -122,7 +120,6 @@ export async function getProjectUsersQuery(
     return data ?? [];
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -167,7 +164,6 @@ export async function getProjectUserQuery(
     return data;
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -208,7 +204,6 @@ export async function getTeamProjectsQuery(
     return data ?? [];
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -249,7 +244,6 @@ export async function getProjectTeamsQuery(
     return data ?? [];
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 

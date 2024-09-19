@@ -41,7 +41,6 @@ export async function getNavigationsQuery(
     return data ?? [];
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -87,7 +86,6 @@ export async function getNavigationQuery(
     return data;
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 

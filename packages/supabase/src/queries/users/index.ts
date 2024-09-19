@@ -41,7 +41,6 @@ export async function getUserQuery(
     return data;
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 

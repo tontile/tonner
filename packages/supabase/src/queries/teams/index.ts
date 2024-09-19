@@ -40,7 +40,6 @@ export async function getTeamQuery(
     return data;
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -78,7 +77,6 @@ export async function getUserTeamsQuery(
     return data ?? [];
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -119,7 +117,6 @@ export async function getTeamUsersQuery(
     return data ?? [];
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -164,7 +161,6 @@ export async function getTeamUserQuery(
     return data;
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 

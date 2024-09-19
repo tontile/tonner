@@ -43,7 +43,6 @@ export async function getUserAccountsQuery(
     return data;
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 

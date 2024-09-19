@@ -40,7 +40,6 @@ export async function getOrganizationQuery(
     return data;
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -81,7 +80,6 @@ export async function getUserOrganizationsQuery(
     return data ?? [];
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -124,7 +122,6 @@ export async function getOrganizationUsersQuery(
     return data ?? [];
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -173,7 +170,6 @@ export async function getOrganizationUserQuery(
     return data;
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 

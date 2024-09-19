@@ -44,7 +44,6 @@ export async function getOrganizationInvitesQuery(
     return data ?? [];
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -95,7 +94,6 @@ export async function getTeamInvitesQuery(
     return data ?? [];
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -144,7 +142,6 @@ export async function getProjectInvitesQuery(
     return data ?? [];
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
@@ -192,7 +189,6 @@ export async function getUserInvitesQuery(
     return data ?? [];
   } catch (error) {
     logger.error(error);
-    throw error;
   }
 }
 
