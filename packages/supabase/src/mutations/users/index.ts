@@ -1,4 +1,4 @@
-import type { PostgrestError } from "@supabase/supabase-js";
+import { logger } from "@tonner/logger";
 import type { Client, Json } from "../../types";
 
 export type UpdateUserParams = {
@@ -12,19 +12,22 @@ export type UpdateUserParams = {
 export async function updateUser(params: UpdateUserParams, supabase: Client) {
   const { data, error } = await supabase.rpc("update_user", params);
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type UpdateUser = Awaited<ReturnType<typeof updateUser>>;
-export type UpdateUserError = PostgrestError;
 
 export async function deleteUser(supabase: Client) {
   const {
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (!session?.user.user_metadata) {
+  if (!session?.user) {
     return;
   }
 
@@ -37,4 +40,3 @@ export async function deleteUser(supabase: Client) {
 }
 
 export type DeleteUser = Awaited<ReturnType<typeof deleteUser>>;
-export type DeleteUserError = PostgrestError;

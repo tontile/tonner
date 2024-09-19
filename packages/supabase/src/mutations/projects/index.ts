@@ -1,4 +1,4 @@
-import type { PostgrestError } from "@supabase/supabase-js";
+import { logger } from "@tonner/logger";
 import type { Client, Json } from "../../types";
 
 type CreateProjectParams = {
@@ -16,12 +16,15 @@ export async function createProject(
 ) {
   const { error, data } = await supabase.rpc("create_project", params);
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type CreateProject = Awaited<ReturnType<typeof createProject>>;
-export type CreateProjectError = PostgrestError;
 
 type UpdateProjectParams = {
   project_id: string;
@@ -37,12 +40,15 @@ export async function updateProject(
 ) {
   const { error, data } = await supabase.rpc("update_project", params);
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type UpdateProject = Awaited<ReturnType<typeof updateProject>>;
-export type UpdateProjectError = PostgrestError;
 
 type DeleteProjectParams = {
   project_id: string;
@@ -54,12 +60,15 @@ export async function deleteProject(
 ) {
   const { error, data } = await supabase.rpc("delete_project", params);
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type DeleteProject = Awaited<ReturnType<typeof deleteProject>>;
-export type DeleteProjectError = PostgrestError;
 
 type UpdateProjectUserParams = {
   project_id: string;
@@ -73,12 +82,15 @@ export async function updateProjectUser(
 ) {
   const { error, data } = await supabase.rpc("update_user_on_project", params);
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type UpdateProjectUser = Awaited<ReturnType<typeof updateProjectUser>>;
-export type UpdateProjectUserError = PostgrestError;
 
 type RemoveProjectUserParams = {
   project_id: string;
@@ -91,12 +103,15 @@ export async function removeProjectUser(
 ) {
   const { error, data } = await supabase.rpc("remove_project_user", params);
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type RemoveProjectUser = Awaited<ReturnType<typeof removeProjectUser>>;
-export type RemoveProjectUserError = PostgrestError;
 
 type RemoveProjectTeamParams = {
   project_id: string;
@@ -109,9 +124,12 @@ export async function removeProjectTeam(
 ) {
   const { error, data } = await supabase.rpc("remove_project_team", params);
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type RemoveProjectTeam = Awaited<ReturnType<typeof removeProjectTeam>>;
-export type RemoveProjectTeamError = PostgrestError;

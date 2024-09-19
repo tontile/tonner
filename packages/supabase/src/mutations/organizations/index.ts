@@ -1,4 +1,4 @@
-import type { PostgrestError } from "@supabase/supabase-js";
+import { logger } from "@tonner/logger";
 import type { Client, Json } from "../../types";
 
 type CreateOrganizationParams = {
@@ -13,12 +13,15 @@ export async function createOrganization(
 ) {
   const { error, data } = await supabase.rpc("create_organization", params);
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type CreateOrganization = Awaited<ReturnType<typeof createOrganization>>;
-export type CreateOrganizationError = PostgrestError;
 
 type UpdateOrganizationParams = {
   organization_id: string;
@@ -34,12 +37,15 @@ export async function updateOrganization(
 ) {
   const { error, data } = await supabase.rpc("update_organization", params);
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type UpdateOrganization = Awaited<ReturnType<typeof updateOrganization>>;
-export type UpdateOrganizationError = PostgrestError;
 
 type UpdateOrganizationUserParams = {
   organization_id: string;
@@ -56,14 +62,17 @@ export async function updateOrganizationUser(
     params,
   );
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type UpdateOrganizationUser = Awaited<
   ReturnType<typeof updateOrganizationUser>
 >;
-export type UpdateOrganizationUserError = PostgrestError;
 
 type RemoveOrganizationUserParams = {
   organization_id: string;
@@ -79,11 +88,14 @@ export async function removeOrganizationUser(
     params,
   );
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type RemoveOrganizationUser = Awaited<
   ReturnType<typeof removeOrganizationUser>
 >;
-export type RemoveOrganizationUserError = PostgrestError;

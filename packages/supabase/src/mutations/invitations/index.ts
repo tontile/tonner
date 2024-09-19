@@ -16,7 +16,11 @@ export async function createUserInvite(
 ) {
   const { error, data } = await supabase.rpc("create_invitation", params);
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
@@ -30,21 +34,16 @@ export async function acceptInviteByToken(
   { token }: AcceptInviteByTokenParams,
   supabase: Client,
 ) {
-  try {
-    const { error, data } = await supabase.rpc("accept_invitation", {
-      lookup_invitation_token: token,
-    });
+  const { error, data } = await supabase.rpc("accept_invitation", {
+    lookup_invitation_token: token,
+  });
 
-    if (error) {
-      logger.error(error);
-      return null;
-    }
-
-    return data;
-  } catch (error) {
+  if (error) {
     logger.error(error);
-    throw error;
+    return null;
   }
+
+  return data;
 }
 
 export type AcceptInviteByToken = Awaited<
@@ -63,7 +62,11 @@ export async function deleteInvite(
     invitation_id,
   });
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 

@@ -1,4 +1,4 @@
-import type { PostgrestError } from "@supabase/supabase-js";
+import { logger } from "@tonner/logger";
 import type { Client, Json } from "../../types";
 
 type CreateTeamParams = {
@@ -11,12 +11,15 @@ type CreateTeamParams = {
 export async function createTeam(params: CreateTeamParams, supabase: Client) {
   const { error, data } = await supabase.rpc("create_team", params);
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type CreateTeam = Awaited<ReturnType<typeof createTeam>>;
-export type CreateTeamError = PostgrestError;
 
 type UpdateTeamParams = {
   team_id: string;
@@ -29,12 +32,15 @@ type UpdateTeamParams = {
 export async function updateTeam(params: UpdateTeamParams, supabase: Client) {
   const { error, data } = await supabase.rpc("update_team", params);
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type UpdateTeam = Awaited<ReturnType<typeof updateTeam>>;
-export type UpdateTeamError = PostgrestError;
 
 type DeleteTeamParams = {
   team_id: string;
@@ -56,12 +62,15 @@ export async function updateTeamUser(
 ) {
   const { error, data } = await supabase.rpc("update_user_on_team", params);
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type UpdateTeamUser = Awaited<ReturnType<typeof updateTeamUser>>;
-export type UpdateTeamUserError = PostgrestError;
 
 type DeleteTeamUserParams = {
   team_id: string;
@@ -74,9 +83,12 @@ export async function removeTeamUser(
 ) {
   const { error, data } = await supabase.rpc("remove_team_user", params);
 
-  if (error) throw error;
+  if (error) {
+    logger.error(error);
+    return null;
+  }
+
   return data;
 }
 
 export type RemoveTeamUser = Awaited<ReturnType<typeof removeTeamUser>>;
-export type RemoveTeamUserError = PostgrestError;
