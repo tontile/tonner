@@ -85,6 +85,7 @@ export type Trackers = Awaited<ReturnType<typeof getTrackersQuery>>;
 export type GetTrackerRecordsParams = {
   project_id: string;
   team_id?: string;
+  tracker_id?: string;
   from: string;
   to: string;
 };
@@ -101,13 +102,17 @@ export async function getTrackerRecordsQuery(
   let query = supabase
     .from("tracker_entries")
     .select("*, assigned:users(*), tracker:trackers(*)")
-    .eq("tracker_id", params.project_id)
+    .eq("project_id", params.project_id)
 
     .gte("start_time", params.from)
     .lte("stop_time", params.to);
 
   if (params.team_id) {
     query.eq("team_id", params.team_id);
+  }
+
+  if (params.tracker_id) {
+    query.eq("tracker_id", params.tracker_id);
   }
 
   if (signal) {
