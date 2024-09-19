@@ -1,17 +1,8 @@
-import { logger } from "@tonner/logger";
-import { createClient } from "@tonner/supabase/server";
-import type { Database, Tables, TablesUpdate } from "../types";
-
-export async function updateUser(userId: string, data: TablesUpdate<"users">) {
-  const supabase = createClient();
-
-  try {
-    const result = await supabase.from("users").update(data).eq("id", userId);
-
-    return result;
-  } catch (error) {
-    logger.error(error);
-
-    throw error;
-  }
-}
+export * from "./accounts/index";
+export * from "./invitations/index";
+export * from "./organizations/index";
+export * from "./projects/index";
+export * from "./secrets/index";
+export * from "./teams/index";
+export * from "./trackers/index";
+export * from "./users/index";
