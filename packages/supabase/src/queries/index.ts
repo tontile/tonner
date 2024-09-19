@@ -1,29 +1,9 @@
-import { logger } from "@tonner/logger";
-import { createClient } from "@tonner/supabase/server";
-
-export async function getUser() {
-  const supabase = createClient();
-
-  try {
-    const result = await supabase.auth.getUser();
-
-    return result;
-  } catch (error) {
-    logger.error(error);
-
-    throw error;
-  }
-}
-
-export async function getPosts() {
-  const supabase = createClient();
-
-  try {
-    const result = await supabase.from("posts").select("*");
-
-    return result;
-  } catch (error) {
-    logger.error(error);
-    throw error;
-  }
-}
+export * from "./accounts/index";
+export * from "./invitations/index";
+export * from "./navigations/index";
+export * from "./organizations/index";
+export * from "./projects/index";
+export * from "./secrets/index";
+export * from "./teams/index";
+export * from "./trackers/index";
+export * from "./users/index";
