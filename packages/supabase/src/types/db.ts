@@ -1315,6 +1315,7 @@ export type Database = {
           duration: number | null
           id: string
           private_metadata: Json | null
+          project_id: string
           public_metadata: Json | null
           rate: number | null
           start_time: string | null
@@ -1335,6 +1336,7 @@ export type Database = {
           duration?: number | null
           id?: string
           private_metadata?: Json | null
+          project_id: string
           public_metadata?: Json | null
           rate?: number | null
           start_time?: string | null
@@ -1354,6 +1356,7 @@ export type Database = {
           duration?: number | null
           id?: string
           private_metadata?: Json | null
+          project_id?: string
           public_metadata?: Json | null
           rate?: number | null
           start_time?: string | null
@@ -1563,6 +1566,7 @@ export type Database = {
           estimate: number | null
           id: string
           private_metadata: Json | null
+          project_id: string
           project_name: string
           project_status:
             | "backlog"
@@ -1583,8 +1587,9 @@ export type Database = {
           created_at?: string | null
           created_by?: string | null
           estimate?: number | null
-          id: string
+          id?: string
           private_metadata?: Json | null
+          project_id: string
           project_name: string
           project_status:
             | "backlog"
@@ -1605,6 +1610,7 @@ export type Database = {
           estimate?: number | null
           id?: string
           private_metadata?: Json | null
+          project_id?: string
           project_name?: string
           project_status?:
             | "backlog"
@@ -1628,79 +1634,79 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "trackers_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            foreignKeyName: "trackers_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
             referencedRelation: "projects"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "trackers_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            foreignKeyName: "trackers_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
             referencedRelation: "v_invitations"
             referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "trackers_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            foreignKeyName: "trackers_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
             referencedRelation: "v_organization_invites"
             referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "trackers_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            foreignKeyName: "trackers_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
             referencedRelation: "v_project_invites"
             referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "trackers_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            foreignKeyName: "trackers_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
             referencedRelation: "v_project_members"
             referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "trackers_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            foreignKeyName: "trackers_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
             referencedRelation: "v_project_teams"
             referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "trackers_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            foreignKeyName: "trackers_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
             referencedRelation: "v_projects"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "trackers_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            foreignKeyName: "trackers_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
             referencedRelation: "v_team_invites"
             referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "trackers_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            foreignKeyName: "trackers_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
             referencedRelation: "v_team_projects"
             referencedColumns: ["project_id"]
           },
           {
-            foreignKeyName: "trackers_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            foreignKeyName: "trackers_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
             referencedRelation: "v_trackers"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "trackers_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            foreignKeyName: "trackers_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
             referencedRelation: "v_user_projects"
             referencedColumns: ["project_id"]
           },
@@ -3447,11 +3453,7 @@ export type Database = {
         Args: {
           lookup_invitation_token: string
         }
-        Returns: {
-          membership_role: "owner" | "write" | "read"
-          account_name: unknown
-          partial_name: unknown
-        }[]
+        Returns: Json
       }
       create_invitation: {
         Args: {

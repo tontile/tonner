@@ -46,8 +46,9 @@ END;
 $$;
 
 CREATE TABLE IF NOT EXISTS public.trackers(
-    id uuid NOT NULL REFERENCES public.projects(id) ON DELETE CASCADE,
+    id uuid NOT NULL DEFAULT gen_random_uuid(),
     -- COLUMNS
+    project_id uuid NOT NULL REFERENCES public.projects(id) ON DELETE CASCADE,
     project_name text NOT NULL,
     project_status app.project_status NOT NULL,
     estimate bigint,
@@ -93,6 +94,7 @@ CREATE TABLE IF NOT EXISTS public.tracker_entries(
     task_id uuid REFERENCES public.tasks(id) ON DELETE SET NULL,
     team_id uuid REFERENCES public.teams(id) ON DELETE SET NULL,
     assigned_id uuid REFERENCES public.users(id),
+    project_id uuid NOT NULL,
     closed_at timestamp without time zone DEFAULT now(),
     start_time timestamp without time zone,
     stop_time timestamp without time zone,
@@ -160,7 +162,7 @@ BEGIN
         FROM
             public.projects
         WHERE
-            id = NEW.id);
+            id = NEW.project_id);
     NEW.project_status =(
         SELECT
             project_status
@@ -168,6 +170,22 @@ BEGIN
             public.projects
         WHERE
             project_name = NEW.project_name);
+    RETURN NEW;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION app.trigger_tracker_entries_on_tracker_entry_creating()
+    RETURNS TRIGGER
+    LANGUAGE PLPGSQL
+    AS $$
+BEGIN
+    NEW.project_id =(
+        SELECT
+            project_id
+        FROM
+            public.trackers
+        WHERE
+            id = NEW.tracker_id);
     RETURN NEW;
 END;
 $$;
@@ -210,6 +228,11 @@ CREATE TRIGGER app_trackers_on_tracker_creating
     FOR EACH ROW
     EXECUTE FUNCTION app.trigger_trackers_on_tracker_creating();
 
+CREATE TRIGGER app_tracker_entries_on_tracker_entry_creating
+    BEFORE INSERT ON public.tracker_entries
+    FOR EACH ROW
+    EXECUTE FUNCTION app.trigger_tracker_entries_on_tracker_entry_creating();
+
 CREATE TRIGGER set_tracker_reports_timestamp
     BEFORE INSERT OR UPDATE ON app.tracker_reports
     FOR EACH ROW
@@ -235,7 +258,7 @@ CREATE OR REPLACE FUNCTION app.get_project_collaborators(project_id uuid)
         public.trackers t
         JOIN public.tracker_entries te ON te.tracker_id = t.id
     WHERE
-        t.id = project_id;
+        t.project_id = get_project_collaborators.project_id;
 $$;
 
 GRANT EXECUTE ON FUNCTION app.get_project_collaborators(UUID) TO authenticated, service_role;
@@ -245,7 +268,7 @@ GRANT EXECUTE ON FUNCTION app.get_project_collaborators(UUID) TO authenticated, 
 -------------------------------------------------------
 ALTER TABLE public.trackers ENABLE ROW LEVEL SECURITY;
 
-GRANT INSERT (project_status, estimate, public_metadata) ON public.trackers TO authenticated;
+GRANT INSERT (project_id, project_status, estimate, public_metadata) ON public.trackers TO authenticated;
 
 GRANT UPDATE (project_status, rate, estimate, public_metadata) ON public.trackers TO authenticated;
 
@@ -277,25 +300,25 @@ GRANT DELETE ON app.tracker_reports TO authenticated;
 
 CREATE POLICY trackers_insert_policy ON public.trackers AS permissive
     FOR INSERT TO authenticated
-        WITH CHECK (id IN (
+        WITH CHECK (project_id IN (
             SELECT
                 app.get_project_ids_with_role(auth.uid(), 'write')));
 
 CREATE POLICY trackers_update_policy ON public.trackers AS permissive
     FOR UPDATE TO authenticated
-        USING (id IN (
+        USING (project_id IN (
             SELECT
                 app.get_project_ids_with_role(auth.uid(), 'write')));
 
 CREATE POLICY trackers_delete_policy ON public.trackers AS permissive
     FOR DELETE TO authenticated
-        USING (id IN (
+        USING (project_id IN (
             SELECT
                 app.get_project_ids_with_role(auth.uid(), 'owner')));
 
 CREATE POLICY trackers_select_policy ON public.trackers AS permissive
     FOR SELECT TO authenticated
-        USING (id IN (
+        USING (project_id IN (
             SELECT
                 app.get_project_ids_with_role(auth.uid())));
 
