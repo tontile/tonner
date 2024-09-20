@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS public.teams(
     display_name text CHECK (LENGTH(display_name) <= 128),
     bio text CHECK (LENGTH(bio) <= 512),
     avatar_url text,
-    parent_team_id uuid REFERENCES public.teams(id) ON DELETE SET NULL,
     -- TRACKER
     created_at timestamp with time zone DEFAULT NOW(),
     created_by uuid REFERENCES auth.users(id),
@@ -44,8 +43,6 @@ CREATE INDEX IF NOT EXISTS idx_teams_account_name_partial_name ON public.teams(a
 CREATE INDEX IF NOT EXISTS idx_teams_partial_name_search ON public.teams USING gin(partial_name extensions.gin_trgm_ops);
 
 CREATE INDEX IF NOT EXISTS idx_teams_account_name_search ON public.teams USING gin(account_name extensions.gin_trgm_ops);
-
-CREATE INDEX IF NOT EXISTS idx_teams_parent_team_id ON public.teams(parent_team_id);
 
 CREATE INDEX IF NOT EXISTS idx_users_on_team_user_id ON public.users_on_team(user_id);
 
@@ -118,36 +115,6 @@ CREATE TRIGGER app_teams_on_storage_object_created
 -------------------------------------------------------
 -- Section - domain Functions
 -------------------------------------------------------
-CREATE OR REPLACE FUNCTION app.get_parent_team_id(team_id uuid)
-    RETURNS uuid
-    LANGUAGE SQL
-    SECURITY DEFINER
-    AS $$
-    SELECT
-        t.parent_team_id
-    FROM
-        public.teams t
-    WHERE
-        t.id = get_parent_team_id.team_id;
-$$;
-
-GRANT EXECUTE ON FUNCTION app.get_parent_team_id(uuid) TO authenticated, service_role;
-
-CREATE OR REPLACE FUNCTION app.get_account_team_ids(account_name app.valid_name)
-    RETURNS SETOF UUID
-    LANGUAGE SQL
-    SECURITY DEFINER
-    AS $$
-    SELECT
-        t.id
-    FROM
-        public.teams t
-    WHERE
-        t.account_name = get_account_team_ids.account_name;
-$$;
-
-GRANT EXECUTE ON FUNCTION app.get_account_team_ids(app.valid_name) TO authenticated, service_role;
-
 CREATE OR REPLACE FUNCTION app.get_team_users_with_role(team_id uuid, passed_in_role app.membership_role DEFAULT NULL)
     RETURNS SETOF UUID
     LANGUAGE SQL
@@ -213,7 +180,7 @@ ALTER TABLE public.teams ENABLE ROW LEVEL SECURITY;
 
 ALTER TABLE public.users_on_team ENABLE ROW LEVEL SECURITY;
 
-GRANT INSERT (account_name, partial_name, display_name, bio, parent_team_id, public_metadata) ON public.teams TO authenticated;
+GRANT INSERT (account_name, partial_name, display_name, bio, public_metadata) ON public.teams TO authenticated;
 
 GRANT UPDATE (display_name, bio, public_metadata) ON public.teams TO authenticated;
 
@@ -229,10 +196,7 @@ CREATE POLICY teams_insert_policy ON public.teams AS permissive
     FOR INSERT TO authenticated
         WITH CHECK (account_name IN (
             SELECT
-                app.get_organization_names_with_role(auth.uid(), 'owner'))
-                AND (parent_team_id IS NULL OR parent_team_id IN (
-                    SELECT
-                        app.get_account_team_ids(account_name))));
+                app.get_organization_names_with_role(auth.uid(), 'owner')));
 
 CREATE POLICY teams_update_policy ON public.teams AS permissive
     FOR UPDATE TO authenticated
@@ -279,8 +243,7 @@ SELECT
     t.display_name,
     t.bio,
     t.created_at,
-    t.public_metadata,
-    t.parent_team_id
+    t.public_metadata
 FROM
     public.teams t;
 
@@ -397,7 +360,7 @@ $$;
 
 GRANT EXECUTE ON FUNCTION public.get_team_by_name(text) TO authenticated;
 
-CREATE OR REPLACE FUNCTION public.create_team(account_name app.valid_name, partial_name app.valid_name, display_name text DEFAULT NULL, bio text DEFAULT NULL, parent_team_id uuid DEFAULT NULL)
+CREATE OR REPLACE FUNCTION public.create_team(account_name app.valid_name, partial_name app.valid_name, display_name text DEFAULT NULL, bio text DEFAULT NULL)
     RETURNS public.teams
     SET search_path = public
     SECURITY DEFINER
@@ -406,8 +369,8 @@ CREATE OR REPLACE FUNCTION public.create_team(account_name app.valid_name, parti
 DECLARE
     new_team_id uuid;
 BEGIN
-    INSERT INTO public.teams(account_name, partial_name, display_name, bio, parent_team_id)
-        VALUES ($1, $2, $3, $4, $5)
+    INSERT INTO public.teams(account_name, partial_name, display_name, bio)
+        VALUES ($1, $2, $3, $4)
     RETURNING
         id INTO new_team_id;
     RETURN get_team_by_id(new_team_id);
@@ -418,7 +381,7 @@ END;
 
 $$;
 
-GRANT EXECUTE ON FUNCTION public.create_team(app.valid_name, app.valid_name, text, text, uuid) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.create_team(app.valid_name, app.valid_name, text, text) TO authenticated;
 
 CREATE OR REPLACE FUNCTION public.update_team(team_id uuid, display_name text DEFAULT NULL, bio text DEFAULT NULL, public_metadata jsonb DEFAULT NULL, replace_metadata boolean DEFAULT FALSE)
     RETURNS public.teams

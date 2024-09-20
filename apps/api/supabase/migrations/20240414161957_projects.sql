@@ -95,37 +95,16 @@ CREATE OR REPLACE FUNCTION app.trigger_users_on_project_on_teams_on_project_crea
     LANGUAGE plpgsql
     AS $$
 BEGIN
-    WITH RECURSIVE team_hierarchy AS(
-        SELECT
-            id
-        FROM
-            public.teams
-        WHERE
-            id = NEW.team_id
-        UNION ALL
-        SELECT
-            t.id
-        FROM
-            public.teams t
-            INNER JOIN team_hierarchy th ON t.parent_team_id = th.id)
     INSERT INTO public.users_on_project(team_id, project_id, user_id, membership_role)
     SELECT
-        th.id,
+        NEW.team_id,
         NEW.project_id,
         ut.user_id,
         'read'::app.membership_role
     FROM
-        team_hierarchy th
-        JOIN public.users_on_team ut ON ut.team_id = th.id
+        public.users_on_team ut
     WHERE
-        ut.user_id NOT IN(
-            SELECT
-                user_id
-            FROM
-                public.users_on_project
-            WHERE
-                project_id = NEW.project_id
-                AND team_id = NEW.team_id)
+        ut.team_id = NEW.team_id
     ON CONFLICT(project_id,
         user_id)
         DO UPDATE SET
@@ -149,14 +128,6 @@ BEGIN
         public.teams_on_project
     WHERE
         team_id = NEW.team_id
-        AND project_id NOT IN(
-            SELECT
-                project_id
-            FROM
-                public.users_on_project
-            WHERE
-                user_id = NEW.user_id
-                AND team_id = NEW.team_id)
     ON CONFLICT(project_id,
         user_id)
         DO UPDATE SET
@@ -180,14 +151,6 @@ BEGIN
         JOIN public.organizations o ON o.account_name = p.account_name
     WHERE
         o.id = NEW.organization_id
-        AND NOT EXISTS(
-            SELECT
-                1
-            FROM
-                public.users_on_project up
-            WHERE
-                up.user_id = NEW.user_id
-                AND up.project_id = p.id)
     ON CONFLICT(project_id,
         user_id)
         DO UPDATE SET
@@ -430,10 +393,7 @@ CREATE POLICY teams_on_project_insert_policy ON public.teams_on_project AS permi
     FOR INSERT TO authenticated
         WITH CHECK (project_id IN (
             SELECT
-                app.get_project_ids_with_role(auth.uid(), 'owner'))
-                AND (
-                    SELECT
-                        app.get_parent_team_id(team_id)) IS NULL);
+                app.get_project_ids_with_role(auth.uid(), 'owner')));
 
 CREATE POLICY teams_on_project_delete_policy ON public.teams_on_project AS permissive
     FOR DELETE TO authenticated
