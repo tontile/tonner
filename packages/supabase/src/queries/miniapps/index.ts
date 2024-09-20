@@ -38,3 +38,45 @@ export async function getMiniAppQuery(
 }
 
 export type MiniApp = Awaited<ReturnType<typeof getMiniAppQuery>>;
+
+export type GetAccountMiniAppsParams = {
+  account_name?: string;
+};
+
+export async function getAccountMiniAppsQuery(
+  { account_name }: GetAccountMiniAppsParams,
+  supabase: Client,
+  signal?: AbortSignal,
+) {
+  if (!account_name) {
+    throw new Error("account_name is required");
+  }
+
+  let query = supabase
+    .from("miniapps")
+    .select("*")
+    .eq("account_name", account_name);
+
+  if (signal) {
+    query = query.abortSignal(signal);
+  }
+
+  try {
+    const { data, error } = await query.order("created_at", {
+      ascending: false,
+    });
+
+    if (error) {
+      logger.error(error);
+      return;
+    }
+
+    if (data) return data;
+  } catch (error) {
+    logger.error(error);
+  }
+}
+
+export type AccountMiniApps = Awaited<
+  ReturnType<typeof getAccountMiniAppsQuery>
+>;
