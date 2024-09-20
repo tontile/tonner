@@ -110,6 +110,18 @@ export const projectKeys = {
   ],
 };
 
+export const miniappKeys = {
+  list: (params: { account_name: string }) => [
+    "accounts",
+    params.account_name,
+    "miniapps",
+  ],
+  single: (params: { miniapp_name: string }) => [
+    "miniapps",
+    params.miniapp_name,
+  ],
+};
+
 export const teamKeys = {
   list: () => ["teams"],
   single: (params: { team_id: string }) => ["teams", params.team_id],
