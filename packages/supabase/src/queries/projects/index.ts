@@ -37,13 +37,55 @@ export async function getProjectQuery(
       return;
     }
 
-    return data;
+    if (data) return data;
   } catch (error) {
     logger.error(error);
   }
 }
 
 export type Project = Awaited<ReturnType<typeof getProjectQuery>>;
+
+export type GetAccountProjectsParams = {
+  account_name?: string;
+};
+
+export async function getAccountProjectsQuery(
+  { account_name }: GetAccountProjectsParams,
+  supabase: Client,
+  signal?: AbortSignal,
+) {
+  if (!account_name) {
+    throw new Error("account_name is required");
+  }
+
+  let query = supabase
+    .from("v_projects")
+    .select("*")
+    .eq("account_name", account_name);
+
+  if (signal) {
+    query = query.abortSignal(signal);
+  }
+
+  try {
+    const { data, error } = await query.order("created_at", {
+      ascending: false,
+    });
+
+    if (error) {
+      logger.error(error);
+      return;
+    }
+
+    return data ?? [];
+  } catch (error) {
+    logger.error(error);
+  }
+}
+
+export type AccountProjects = Awaited<
+  ReturnType<typeof getAccountProjectsQuery>
+>;
 
 export type GetUserProjectsParams = {
   user_id?: string;
@@ -161,7 +203,7 @@ export async function getProjectUserQuery(
       return;
     }
 
-    return data;
+    if (data) return data;
   } catch (error) {
     logger.error(error);
   }

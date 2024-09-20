@@ -40,7 +40,7 @@ export async function getUserAccountsQuery(
       return;
     }
 
-    return data;
+    if (data) return data;
   } catch (error) {
     logger.error(error);
   }

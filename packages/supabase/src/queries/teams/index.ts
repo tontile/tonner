@@ -37,7 +37,7 @@ export async function getTeamQuery(
       return;
     }
 
-    return data;
+    if (data) return data;
   } catch (error) {
     logger.error(error);
   }
@@ -158,7 +158,7 @@ export async function getTeamUserQuery(
       return;
     }
 
-    return data;
+    if (data) return data;
   } catch (error) {
     logger.error(error);
   }

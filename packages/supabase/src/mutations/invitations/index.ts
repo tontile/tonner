@@ -21,7 +21,7 @@ export async function createUserInvite(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type CreateUserInvite = Awaited<ReturnType<typeof createUserInvite>>;
@@ -43,7 +43,7 @@ export async function acceptInviteByToken(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type AcceptInviteByToken = Awaited<
@@ -67,7 +67,7 @@ export async function deleteInvite(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type DeleteInvite = Awaited<ReturnType<typeof deleteInvite>>;

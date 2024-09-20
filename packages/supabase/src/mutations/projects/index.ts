@@ -21,7 +21,7 @@ export async function createProject(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type CreateProject = Awaited<ReturnType<typeof createProject>>;
@@ -45,7 +45,7 @@ export async function updateProject(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type UpdateProject = Awaited<ReturnType<typeof updateProject>>;
@@ -65,7 +65,7 @@ export async function deleteProject(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type DeleteProject = Awaited<ReturnType<typeof deleteProject>>;
@@ -87,7 +87,7 @@ export async function updateProjectUser(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type UpdateProjectUser = Awaited<ReturnType<typeof updateProjectUser>>;
@@ -108,7 +108,7 @@ export async function removeProjectUser(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type RemoveProjectUser = Awaited<ReturnType<typeof removeProjectUser>>;
@@ -129,7 +129,7 @@ export async function removeProjectTeam(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type RemoveProjectTeam = Awaited<ReturnType<typeof removeProjectTeam>>;

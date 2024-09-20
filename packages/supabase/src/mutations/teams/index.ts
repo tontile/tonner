@@ -16,7 +16,7 @@ export async function createTeam(params: CreateTeamParams, supabase: Client) {
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type CreateTeam = Awaited<ReturnType<typeof createTeam>>;
@@ -37,7 +37,7 @@ export async function updateTeam(params: UpdateTeamParams, supabase: Client) {
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type UpdateTeam = Awaited<ReturnType<typeof updateTeam>>;
@@ -67,7 +67,7 @@ export async function updateTeamUser(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type UpdateTeamUser = Awaited<ReturnType<typeof updateTeamUser>>;
@@ -88,7 +88,7 @@ export async function removeTeamUser(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type RemoveTeamUser = Awaited<ReturnType<typeof removeTeamUser>>;

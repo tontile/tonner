@@ -12,6 +12,7 @@
   "dependencies": {
     "@supabase/ssr": "^0.5.1",
     "@tonner/logger": "workspace:*",
+    "@tonner/cache": "workspace:*",
     "react": "^18.3.1",
     "server-only": "^0.0.1",
     "supabase": "^1.191.3"

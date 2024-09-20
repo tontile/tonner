@@ -18,7 +18,7 @@ export async function createOrganization(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type CreateOrganization = Awaited<ReturnType<typeof createOrganization>>;
@@ -42,7 +42,7 @@ export async function updateOrganization(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type UpdateOrganization = Awaited<ReturnType<typeof updateOrganization>>;
@@ -67,7 +67,7 @@ export async function updateOrganizationUser(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type UpdateOrganizationUser = Awaited<
@@ -93,7 +93,7 @@ export async function removeOrganizationUser(
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type RemoveOrganizationUser = Awaited<

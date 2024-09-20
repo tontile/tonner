@@ -83,7 +83,7 @@ export async function getNavigationQuery(
       return;
     }
 
-    return data;
+    if (data) return data;
   } catch (error) {
     logger.error(error);
   }

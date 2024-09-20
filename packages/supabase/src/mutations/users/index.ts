@@ -17,7 +17,7 @@ export async function updateUser(params: UpdateUserParams, supabase: Client) {
     return;
   }
 
-  return data;
+  if (data) return data;
 }
 
 export type UpdateUser = Awaited<ReturnType<typeof updateUser>>;

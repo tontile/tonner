@@ -37,7 +37,7 @@ export async function getOrganizationQuery(
       return;
     }
 
-    return data;
+    if (data) return data;
   } catch (error) {
     logger.error(error);
   }
@@ -167,7 +167,7 @@ export async function getOrganizationUserQuery(
       return;
     }
 
-    return data;
+    if (data) return data;
   } catch (error) {
     logger.error(error);
   }

@@ -1,8 +1,9 @@
 import { unstable_cache } from "next/cache";
 import { parse, stringify } from "superjson";
+import { createTags } from "./utils";
 
 type CacheConfig = {
-  revalidate: number;
+  revalidate?: number;
   tags: string[];
 };
 
@@ -13,6 +14,7 @@ export async function createUnstableCache<T>(
   enabled = true,
 ): Promise<T> {
   if (process.env.TONNER_CACHE === "true" && enabled) {
+    const staticTags = createTags(keyParts);
     const cachedFn = unstable_cache(
       async () => {
         const result = await fn();
@@ -21,7 +23,10 @@ export async function createUnstableCache<T>(
         return serializedResult;
       },
       keyParts,
-      options,
+      {
+        revalidate: options.revalidate,
+        tags: [...staticTags, ...options.tags],
+      },
     );
 
     const cachedResult = await cachedFn();
@@ -34,3 +39,5 @@ export async function createUnstableCache<T>(
   // If caching is not enabled, just call the function
   return await fn();
 }
+
+export * from "./utils";
