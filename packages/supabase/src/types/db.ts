@@ -376,6 +376,159 @@ export type Database = {
           },
         ];
       };
+      miniapps: {
+        Row: {
+          account_name: string;
+          bio: string | null;
+          content: Json | null;
+          created_at: string | null;
+          created_by: string | null;
+          display_name: string | null;
+          favicon_url: string | null;
+          id: string;
+          miniapp_name: string;
+          partial_name: string;
+          private_metadata: Json | null;
+          public_metadata: Json | null;
+          published: boolean;
+          updated_at: string | null;
+          updated_by: string | null;
+        };
+        Insert: {
+          account_name: string;
+          bio?: string | null;
+          content?: Json | null;
+          created_at?: string | null;
+          created_by?: string | null;
+          display_name?: string | null;
+          favicon_url?: string | null;
+          id: string;
+          miniapp_name?: string;
+          partial_name: string;
+          private_metadata?: Json | null;
+          public_metadata?: Json | null;
+          published?: boolean;
+          updated_at?: string | null;
+          updated_by?: string | null;
+        };
+        Update: {
+          account_name?: string;
+          bio?: string | null;
+          content?: Json | null;
+          created_at?: string | null;
+          created_by?: string | null;
+          display_name?: string | null;
+          favicon_url?: string | null;
+          id?: string;
+          miniapp_name?: string;
+          partial_name?: string;
+          private_metadata?: Json | null;
+          public_metadata?: Json | null;
+          published?: boolean;
+          updated_at?: string | null;
+          updated_by?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "fk_account_registry";
+            columns: ["account_name"];
+            isOneToOne: false;
+            referencedRelation: "account_registry";
+            referencedColumns: ["account_name"];
+          },
+          {
+            foreignKeyName: "miniapps_created_by_fkey";
+            columns: ["created_by"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "projects";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_invitations";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_organization_invites";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_project_invites";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_project_members";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_project_teams";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_projects";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_team_invites";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_team_projects";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_trackers";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_user_projects";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_updated_by_fkey";
+            columns: ["updated_by"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       navigation_options: {
         Row: {
           created_at: string | null;
@@ -1005,7 +1158,6 @@ export type Database = {
           created_by: string | null;
           display_name: string | null;
           id: string;
-          parent_team_id: string | null;
           partial_name: string;
           private_metadata: Json | null;
           public_metadata: Json | null;
@@ -1021,7 +1173,6 @@ export type Database = {
           created_by?: string | null;
           display_name?: string | null;
           id?: string;
-          parent_team_id?: string | null;
           partial_name: string;
           private_metadata?: Json | null;
           public_metadata?: Json | null;
@@ -1037,7 +1188,6 @@ export type Database = {
           created_by?: string | null;
           display_name?: string | null;
           id?: string;
-          parent_team_id?: string | null;
           partial_name?: string;
           private_metadata?: Json | null;
           public_metadata?: Json | null;
@@ -1059,76 +1209,6 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: "users";
             referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "teams";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_invitations";
-            referencedColumns: ["team_id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_organization_invites";
-            referencedColumns: ["team_id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_project_invites";
-            referencedColumns: ["team_id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_project_teams";
-            referencedColumns: ["team_id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_team_invites";
-            referencedColumns: ["team_id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_team_members";
-            referencedColumns: ["team_id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_team_projects";
-            referencedColumns: ["team_id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_teams";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_user_teams";
-            referencedColumns: ["team_id"];
           },
           {
             foreignKeyName: "teams_updated_by_fkey";
@@ -2430,6 +2510,127 @@ export type Database = {
           },
         ];
       };
+      v_miniapps: {
+        Row: {
+          account_name: string | null;
+          bio: string | null;
+          created_at: string | null;
+          display_name: string | null;
+          favicon_url: string | null;
+          id: string | null;
+          miniapp_name: string | null;
+          partial_name: string | null;
+          public_metadata: Json | null;
+        };
+        Insert: {
+          account_name?: string | null;
+          bio?: string | null;
+          created_at?: string | null;
+          display_name?: string | null;
+          favicon_url?: string | null;
+          id?: string | null;
+          miniapp_name?: string | null;
+          partial_name?: string | null;
+          public_metadata?: Json | null;
+        };
+        Update: {
+          account_name?: string | null;
+          bio?: string | null;
+          created_at?: string | null;
+          display_name?: string | null;
+          favicon_url?: string | null;
+          id?: string | null;
+          miniapp_name?: string | null;
+          partial_name?: string | null;
+          public_metadata?: Json | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "fk_account_registry";
+            columns: ["account_name"];
+            isOneToOne: false;
+            referencedRelation: "account_registry";
+            referencedColumns: ["account_name"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "projects";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_invitations";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_organization_invites";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_project_invites";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_project_members";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_project_teams";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_projects";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_team_invites";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_team_projects";
+            referencedColumns: ["project_id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_trackers";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "miniapps_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "v_user_projects";
+            referencedColumns: ["project_id"];
+          },
+        ];
+      };
       v_organization_invites: {
         Row: {
           account_name: string | null;
@@ -2912,7 +3113,6 @@ export type Database = {
           created_at: string | null;
           display_name: string | null;
           id: string | null;
-          parent_team_id: string | null;
           partial_name: string | null;
           public_metadata: Json | null;
           team_name: string | null;
@@ -2924,7 +3124,6 @@ export type Database = {
           created_at?: string | null;
           display_name?: string | null;
           id?: string | null;
-          parent_team_id?: string | null;
           partial_name?: string | null;
           public_metadata?: Json | null;
           team_name?: string | null;
@@ -2936,7 +3135,6 @@ export type Database = {
           created_at?: string | null;
           display_name?: string | null;
           id?: string | null;
-          parent_team_id?: string | null;
           partial_name?: string | null;
           public_metadata?: Json | null;
           team_name?: string | null;
@@ -2948,76 +3146,6 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: "account_registry";
             referencedColumns: ["account_name"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "teams";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_invitations";
-            referencedColumns: ["team_id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_organization_invites";
-            referencedColumns: ["team_id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_project_invites";
-            referencedColumns: ["team_id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_project_teams";
-            referencedColumns: ["team_id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_team_invites";
-            referencedColumns: ["team_id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_team_members";
-            referencedColumns: ["team_id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_team_projects";
-            referencedColumns: ["team_id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_teams";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "teams_parent_team_id_fkey";
-            columns: ["parent_team_id"];
-            isOneToOne: false;
-            referencedRelation: "v_user_teams";
-            referencedColumns: ["team_id"];
           },
         ];
       };
@@ -3466,6 +3594,32 @@ export type Database = {
         };
         Returns: string;
       };
+      create_miniapp: {
+        Args: {
+          account_name: unknown;
+          partial_name: unknown;
+          display_name?: string;
+          bio?: string;
+          content?: Json;
+        };
+        Returns: {
+          account_name: string;
+          bio: string | null;
+          content: Json | null;
+          created_at: string | null;
+          created_by: string | null;
+          display_name: string | null;
+          favicon_url: string | null;
+          id: string;
+          miniapp_name: string;
+          partial_name: string;
+          private_metadata: Json | null;
+          public_metadata: Json | null;
+          published: boolean;
+          updated_at: string | null;
+          updated_by: string | null;
+        };
+      };
       create_organization: {
         Args: {
           account_name: unknown;
@@ -3504,7 +3658,6 @@ export type Database = {
           partial_name: unknown;
           display_name?: string;
           bio?: string;
-          parent_team_id?: string;
         };
         Returns: {
           account_name: string;
@@ -3514,7 +3667,6 @@ export type Database = {
           created_by: string | null;
           display_name: string | null;
           id: string;
-          parent_team_id: string | null;
           partial_name: string;
           private_metadata: Json | null;
           public_metadata: Json | null;
@@ -3526,6 +3678,12 @@ export type Database = {
       delete_invitation: {
         Args: {
           invitation_id: string;
+        };
+        Returns: boolean;
+      };
+      delete_miniapp: {
+        Args: {
+          miniapp_id: string;
         };
         Returns: boolean;
       };
@@ -3574,6 +3732,28 @@ export type Database = {
           updated_at: string | null;
         }[];
       };
+      get_account_miniapps: {
+        Args: {
+          account_name: unknown;
+        };
+        Returns: {
+          account_name: string;
+          bio: string | null;
+          content: Json | null;
+          created_at: string | null;
+          created_by: string | null;
+          display_name: string | null;
+          favicon_url: string | null;
+          id: string;
+          miniapp_name: string;
+          partial_name: string;
+          private_metadata: Json | null;
+          public_metadata: Json | null;
+          published: boolean;
+          updated_at: string | null;
+          updated_by: string | null;
+        }[];
+      };
       get_account_registry_state: {
         Args: Record<PropertyKey, never>;
         Returns: Json;
@@ -3590,7 +3770,6 @@ export type Database = {
           created_by: string | null;
           display_name: string | null;
           id: string;
-          parent_team_id: string | null;
           partial_name: string;
           private_metadata: Json | null;
           public_metadata: Json | null;
@@ -3702,6 +3881,56 @@ export type Database = {
           updated_at: string | null;
           updated_by: string | null;
         };
+      };
+      get_miniapp_by_id: {
+        Args: {
+          miniapp_id: string;
+        };
+        Returns: {
+          account_name: string;
+          bio: string | null;
+          content: Json | null;
+          created_at: string | null;
+          created_by: string | null;
+          display_name: string | null;
+          favicon_url: string | null;
+          id: string;
+          miniapp_name: string;
+          partial_name: string;
+          private_metadata: Json | null;
+          public_metadata: Json | null;
+          published: boolean;
+          updated_at: string | null;
+          updated_by: string | null;
+        };
+      };
+      get_miniapp_by_name: {
+        Args: {
+          miniapp_name: string;
+        };
+        Returns: {
+          account_name: string;
+          bio: string | null;
+          content: Json | null;
+          created_at: string | null;
+          created_by: string | null;
+          display_name: string | null;
+          favicon_url: string | null;
+          id: string;
+          miniapp_name: string;
+          partial_name: string;
+          private_metadata: Json | null;
+          public_metadata: Json | null;
+          published: boolean;
+          updated_at: string | null;
+          updated_by: string | null;
+        };
+      };
+      get_miniapp_id: {
+        Args: {
+          miniapp_name: string;
+        };
+        Returns: string;
       };
       get_organization_by_id: {
         Args: {
@@ -3880,7 +4109,6 @@ export type Database = {
           created_by: string | null;
           display_name: string | null;
           id: string;
-          parent_team_id: string | null;
           partial_name: string;
           private_metadata: Json | null;
           public_metadata: Json | null;
@@ -3901,7 +4129,6 @@ export type Database = {
           created_by: string | null;
           display_name: string | null;
           id: string;
-          parent_team_id: string | null;
           partial_name: string;
           private_metadata: Json | null;
           public_metadata: Json | null;
@@ -4095,6 +4322,29 @@ export type Database = {
         };
         Returns: boolean;
       };
+      search_miniapps: {
+        Args: {
+          account_name?: string;
+          partial_name?: string;
+        };
+        Returns: {
+          account_name: string;
+          bio: string | null;
+          content: Json | null;
+          created_at: string | null;
+          created_by: string | null;
+          display_name: string | null;
+          favicon_url: string | null;
+          id: string;
+          miniapp_name: string;
+          partial_name: string;
+          private_metadata: Json | null;
+          public_metadata: Json | null;
+          published: boolean;
+          updated_at: string | null;
+          updated_by: string | null;
+        }[];
+      };
       search_organizations: {
         Args: {
           account_name?: string;
@@ -4140,7 +4390,6 @@ export type Database = {
           created_by: string | null;
           display_name: string | null;
           id: string;
-          parent_team_id: string | null;
           partial_name: string;
           private_metadata: Json | null;
           public_metadata: Json | null;
@@ -4166,6 +4415,34 @@ export type Database = {
           "": unknown;
         };
         Returns: unknown;
+      };
+      update_miniapp: {
+        Args: {
+          miniapp_id: string;
+          display_name?: string;
+          bio?: string;
+          content?: Json;
+          published?: boolean;
+          public_metadata?: Json;
+          replace_metadata?: boolean;
+        };
+        Returns: {
+          account_name: string;
+          bio: string | null;
+          content: Json | null;
+          created_at: string | null;
+          created_by: string | null;
+          display_name: string | null;
+          favicon_url: string | null;
+          id: string;
+          miniapp_name: string;
+          partial_name: string;
+          private_metadata: Json | null;
+          public_metadata: Json | null;
+          published: boolean;
+          updated_at: string | null;
+          updated_by: string | null;
+        };
       };
       update_organization: {
         Args: {
@@ -4226,7 +4503,6 @@ export type Database = {
           created_by: string | null;
           display_name: string | null;
           id: string;
-          parent_team_id: string | null;
           partial_name: string;
           private_metadata: Json | null;
           public_metadata: Json | null;
