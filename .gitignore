@@ -60,3 +60,8 @@ tailwind.css
 # Trigger
 .trigger
 .vercel
+
+
+# mkcert
+mkcert
+certificates

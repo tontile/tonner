@@ -6,8 +6,8 @@ import { updateUserSchema } from "../schema";
 
 export const updateUserAction = authActionClient
   .schema(updateUserSchema)
-  .action(async ({ parsedInput: input, ctx: { user } }) => {
-    const result = await updateUser(user.id, input);
+  .action(async ({ parsedInput: input, ctx: { user, supabase } }) => {
+    const result = await updateUser({ ...input, user_id: user.id }, supabase);
 
     return result;
   });
