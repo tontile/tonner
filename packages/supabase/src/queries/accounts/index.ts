@@ -1,6 +1,43 @@
 import { logger } from "@tonner/logger";
 import type { Client } from "../../types";
 
+export type GetAccountParams = {
+  account_name?: string;
+};
+
+export async function getAccountQuery(
+  { account_name }: GetAccountParams,
+  supabase: Client,
+  signal?: AbortSignal,
+) {
+  if (!account_name) {
+    throw new Error("account_name is required");
+  }
+
+  let query = supabase
+    .from("account_registry")
+    .select("*")
+    .eq("account_name", account_name);
+
+  if (signal) {
+    query = query.abortSignal(signal);
+  }
+
+  try {
+    const { data, error } = await query.maybeSingle();
+
+    if (error) {
+      logger.error(error);
+      return false;
+    }
+
+    if (data) return data;
+  } catch (error) {
+    logger.error(error);
+  }
+}
+export type Account = Awaited<ReturnType<typeof getAccountQuery>>;
+
 export type GetUserAccountsParams = {
   user_id?: string;
 };
