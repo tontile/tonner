@@ -1,13 +1,11 @@
-import "@tonner/ui/globals.css";
-
 import { cn } from "@tonner/ui/cn";
 import { Toaster } from "@tonner/ui/toaster";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
-import "@/styles/globals.css";
-import { Providers } from "./providers";
+import "@telegram-apps/telegram-ui/dist/styles.css";
+import "../_assets/globals.css";
+import { Root } from "@/components/layouts/root";
 
 export const metadata: Metadata = {
   title: "Create tonner",
@@ -37,14 +35,10 @@ export default function RootLayout({
         )}
         suppressHydrationWarning
       >
-        <Script
-          src="https://telegram.org/js/telegram-web-app.js"
-          strategy="beforeInteractive"
-        />
-        <Providers locale={locale}>
+        <Root locale={locale}>
           <Toaster />
           {children}
-        </Providers>
+        </Root>
       </body>
     </html>
   );
