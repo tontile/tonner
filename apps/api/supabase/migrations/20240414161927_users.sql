@@ -30,17 +30,6 @@ CREATE INDEX IF NOT EXISTS idx_users_on_account_registry ON public.users(account
 -------------------------------------------------------
 -- Section - TRIGGER Functions
 -------------------------------------------------------
-CREATE OR REPLACE FUNCTION app.trigger_users_on_auth_user_creating()
-    RETURNS TRIGGER
-    LANGUAGE PLPGSQL
-    SECURITY DEFINER
-    AS $$
-BEGIN
-    NEW.raw_user_meta_data = NEW.raw_user_meta_data || jsonb_build_object('account_name', coalesce(NEW.raw_user_meta_data ->> 'account_name', NEW.raw_user_meta_data ->> 'user_name'), 'display_name', coalesce(NEW.raw_user_meta_data ->> 'display_name', NEW.raw_user_meta_data ->> 'full_name'));
-    RETURN NEW;
-END;
-$$;
-
 CREATE OR REPLACE FUNCTION app.trigger_users_on_auth_user_created()
     RETURNS TRIGGER
     LANGUAGE PLPGSQL
@@ -49,10 +38,10 @@ CREATE OR REPLACE FUNCTION app.trigger_users_on_auth_user_created()
 BEGIN
     -- first we add the account_name to the registry
     INSERT INTO public.account_registry(account_name, is_organization)
-        VALUES(NEW.raw_user_meta_data ->> 'account_name', FALSE);
+        VALUES(NEW.raw_app_meta_data ->> 'account_name', FALSE);
     -- create new user
     INSERT INTO public.users(id, account_name, display_name, bio, public_metadata)
-        VALUES(NEW.id, NEW.raw_user_meta_data ->> 'account_name', NEW.raw_user_meta_data ->> 'display_name', NEW.raw_user_meta_data ->> 'bio', jsonb_build_object('locale', 'en', 'week_starts_on_monday', TRUE));
+        VALUES(NEW.id, NEW.raw_app_meta_data ->> 'account_name', NEW.raw_user_meta_data ->> 'display_name', NEW.raw_user_meta_data ->> 'bio', jsonb_build_object('locale', 'en', 'week_starts_on_monday', TRUE));
     RETURN NEW;
 END;
 $$;

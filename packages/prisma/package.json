@@ -1,0 +1,22 @@
+{
+  "name": "@tonner/prisma",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "typecheck": "tsc --noEmit",
+    "postinstall": "bunx prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.19.1",
+    "jsonwebtoken": "9.0.2"
+  },
+  "devDependencies": {
+    "prisma": "^5.19.1",
+    "@types/jsonwebtoken": "9.0.6",
+    "@supabase/supabase-js": "^2.45.3"
+  }
+}
