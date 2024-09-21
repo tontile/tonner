@@ -19,12 +19,12 @@ export async function getUserAccountsQuery(
     .select(`
       account_name,
       is_organization,
-      organization:organizations!fk_account_registry(id,display_name),
-      user:users!fk_account_registry(id,display_name),
-      projects!fk_account_registry(id, account_name, partial_name, display_name),
-      teams!fk_account_registry(id, account_name, partial_name, display_name)
-  `)
-    .order("created_at", { ascending: false });
+      ...organizations(
+        ...users_on_organization()
+      ),
+      ...users()
+    `)
+    .or("users.id.eq.user_id, users_on_organization.user_id.eq.user_id");
 
   if (signal) {
     query = query.abortSignal(signal);
