@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS public.tracker_entries(
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS app.tracker_reports(
+CREATE TABLE IF NOT EXISTS public.tracker_reports(
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     -- COLUMNS
     link_id text,
@@ -144,9 +144,9 @@ CREATE INDEX IF NOT EXISTS idx_tracker_entries_team_id ON public.tracker_entries
 
 CREATE INDEX IF NOT EXISTS idx_tracker_entries_assigned_id ON public.tracker_entries(assigned_id);
 
-CREATE INDEX IF NOT EXISTS idx_tracker_reports_tracker_id ON app.tracker_reports(tracker_id);
+CREATE INDEX IF NOT EXISTS idx_tracker_reports_tracker_id ON public.tracker_reports(tracker_id);
 
-CREATE INDEX IF NOT EXISTS idx_tracker_reports_team_id ON app.tracker_reports(team_id);
+CREATE INDEX IF NOT EXISTS idx_tracker_reports_team_id ON public.tracker_reports(team_id);
 
 -------------------------------------------------------
 -- Section - TRIGGER Functions
@@ -234,12 +234,12 @@ CREATE TRIGGER app_tracker_entries_on_tracker_entry_creating
     EXECUTE FUNCTION app.trigger_tracker_entries_on_tracker_entry_creating();
 
 CREATE TRIGGER set_tracker_reports_timestamp
-    BEFORE INSERT OR UPDATE ON app.tracker_reports
+    BEFORE INSERT OR UPDATE ON public.tracker_reports
     FOR EACH ROW
     EXECUTE PROCEDURE app.trigger_set_timestamps();
 
 CREATE TRIGGER set_tracker_reports_update_tracking
-    BEFORE INSERT OR UPDATE ON app.tracker_reports
+    BEFORE INSERT OR UPDATE ON public.tracker_reports
     FOR EACH ROW
     EXECUTE PROCEDURE app.trigger_set_update_tracking();
 
@@ -290,13 +290,13 @@ GRANT UPDATE (assigned_id, description, duration, rate, closed_at, start_time, s
 
 GRANT DELETE ON public.tracker_entries TO authenticated;
 
-ALTER TABLE app.tracker_reports ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.tracker_reports ENABLE ROW LEVEL SECURITY;
 
-GRANT INSERT (link_id, short_link, team_id, tracker_id) ON app.tracker_reports TO authenticated;
+GRANT INSERT (link_id, short_link, team_id, tracker_id) ON public.tracker_reports TO authenticated;
 
-GRANT UPDATE (link_id, short_link) ON app.tracker_reports TO authenticated;
+GRANT UPDATE (link_id, short_link) ON public.tracker_reports TO authenticated;
 
-GRANT DELETE ON app.tracker_reports TO authenticated;
+GRANT DELETE ON public.tracker_reports TO authenticated;
 
 CREATE POLICY trackers_insert_policy ON public.trackers AS permissive
     FOR INSERT TO authenticated
@@ -373,25 +373,25 @@ CREATE POLICY tracker_entries_select_policy ON public.tracker_entries AS permiss
                 SELECT
                     app.get_project_ids_with_role(auth.uid()))));
 
-CREATE POLICY tracker_reports_insert_policy ON app.tracker_reports AS permissive
+CREATE POLICY tracker_reports_insert_policy ON public.tracker_reports AS permissive
     FOR INSERT TO authenticated
         WITH CHECK (tracker_id IN (
             SELECT
                 app.get_project_ids_with_role(auth.uid(), 'write')));
 
-CREATE POLICY tracker_reports_update_policy ON app.tracker_reports AS permissive
+CREATE POLICY tracker_reports_update_policy ON public.tracker_reports AS permissive
     FOR UPDATE TO authenticated
         USING (tracker_id IN (
             SELECT
                 app.get_project_ids_with_role(auth.uid(), 'write')));
 
-CREATE POLICY tracker_reports_delete_policy ON app.tracker_reports AS permissive
+CREATE POLICY tracker_reports_delete_policy ON public.tracker_reports AS permissive
     FOR DELETE TO authenticated
         USING (tracker_id IN (
             SELECT
                 app.get_project_ids_with_role(auth.uid(), 'owner')));
 
-CREATE POLICY tracker_reports_select_policy ON app.tracker_reports AS permissive
+CREATE POLICY tracker_reports_select_policy ON public.tracker_reports AS permissive
     FOR SELECT TO authenticated
         USING (tracker_id IN (
             SELECT
@@ -459,7 +459,7 @@ SELECT
     trn.created_at,
     trn.created_by
 FROM
-    app.tracker_reports trn;
+    public.tracker_reports trn;
 
 CREATE OR REPLACE FUNCTION public.project_collaborators(public.tracker_entries)
     RETURNS TABLE(
