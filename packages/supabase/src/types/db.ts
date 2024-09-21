@@ -1639,6 +1639,71 @@ export type Database = {
           },
         ];
       };
+      tracker_reports: {
+        Row: {
+          created_at: string | null;
+          created_by: string | null;
+          id: string;
+          link_id: string | null;
+          short_link: string | null;
+          team_id: string | null;
+          tracker_id: string | null;
+          updated_at: string | null;
+          updated_by: string | null;
+        };
+        Insert: {
+          created_at?: string | null;
+          created_by?: string | null;
+          id?: string;
+          link_id?: string | null;
+          short_link?: string | null;
+          team_id?: string | null;
+          tracker_id?: string | null;
+          updated_at?: string | null;
+          updated_by?: string | null;
+        };
+        Update: {
+          created_at?: string | null;
+          created_by?: string | null;
+          id?: string;
+          link_id?: string | null;
+          short_link?: string | null;
+          team_id?: string | null;
+          tracker_id?: string | null;
+          updated_at?: string | null;
+          updated_by?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "tracker_reports_created_by_fkey";
+            columns: ["created_by"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "tracker_reports_team_id_fkey";
+            columns: ["team_id"];
+            isOneToOne: false;
+            referencedRelation: "trackers";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "tracker_reports_tracker_id_fkey";
+            columns: ["tracker_id"];
+            isOneToOne: false;
+            referencedRelation: "trackers";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "tracker_reports_updated_by_fkey";
+            columns: ["updated_by"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       trackers: {
         Row: {
           created_at: string | null;
