@@ -1,5 +1,5 @@
 {
-  "extends": "@tonner/tsconfig/base.json",
+  "extends": "@tonner/typescript/base.json",
   "include": ["src"],
   "exclude": ["node_modules"]
 }
