@@ -176,9 +176,9 @@ CREATE OR REPLACE FUNCTION app.generate_name(account_name text, partial_name tex
     AS $$
     SELECT
         CASE WHEN partial_name IS NOT NULL THEN
-            format('@%s/%s', $1, $2)
+            format('%s-%s', $1, $2)
         ELSE
-            format('%s', $1)
+            $1
         END
 $$;
 
