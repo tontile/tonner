@@ -141,6 +141,22 @@ export const Icons = {
   Logo: (props: any) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
+      width={72}
+      height={63}
+      fill="none"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M0,0l14.5,25.5,10.3-6-4.2-7.4h30.7c-5.1,9-10.1,17.9-15.3,26.9l-4.3-7.4-10.3,6c4.9,8.5,9.7,16.9,14.6,25.5L72,.1c-24-.1-48-.1-72-.1Z"
+        clipRule="evenodd"
+      />
+    </svg>
+  ),
+  LogoText: (props: any) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
       width={112}
       height={28}
       fill="none"
