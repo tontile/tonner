@@ -1,0 +1,12 @@
+{
+  "extends": "@tonner/typescript/react-library.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["**/*.tsx", "**/*.ts", "**/*.js"],
+  "exclude": ["node_modules"],
+  "files": ["./types/declarations.d.ts"]
+}

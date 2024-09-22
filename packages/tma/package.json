@@ -1,0 +1,40 @@
+{
+  "name": "@tonner/tma",
+  "version": "0.1.0",
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "lint": "biome check .",
+    "format": "biome --write .",
+    "typecheck": "tsc --noEmit",
+    "dev": "storybook dev -p 6008",
+    "build": "storybook build"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^8.3.1",
+    "@storybook/addon-links": "^8.3.1",
+    "@storybook/nextjs": "^8.3.1",
+    "autoprefixer": "^10.4.20",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "storybook": "^8.3.1",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "@floating-ui/react-dom": "^2.0.8",
+    "@twa-dev/types": "^7.0.0",
+    "@xelene/vaul-with-scroll-fix": "0.1.4"
+  },
+  "exports": {
+    "./components": "./src/components/index.ts",
+    "./blocks": "./src/components/blocks/index.ts",
+    "./feadback": "./src/components/feadback/index.ts",
+    "./form": "./src/components/form/index.ts",
+    "./layout": "./src/components/layout/index.ts",
+    "./misc": "./src/components/misc/index.ts",
+    "./navigation": "./src/components/navigation/index.ts",
+    "./overlays": "./src/components/overlays/index.ts",
+    "./service": "./src/components/service/index.ts",
+    "./types": "./src/types/index.ts",
+    "./hooks": "./src/hooks/index.ts"
+  }
+}
