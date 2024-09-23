@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect } from "react";
 
-import { canUseDOM } from "@/helpers/dom";
+import { canUseDOM } from "../helpers/dom";
 
 /**
  * A version of `useLayoutEffect` that does not show a warning when server-side rendering.

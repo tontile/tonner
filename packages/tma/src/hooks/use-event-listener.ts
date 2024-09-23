@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useMemo, useRef } from "react";
 
-import { canUseDOM } from "@/helpers/dom";
+import { canUseDOM } from "../helpers/dom";
 
-import { useEnhancedEffect } from "./useEnhancedEffect";
+import { useEnhancedEffect } from "./use-enhanced-effect";
 
 interface EventListenerHandle {
   add: (el: HTMLElement | Document | Window) => void;
@@ -28,7 +28,7 @@ export function useEventListener<E extends Event>(
 ): EventListenerHandle;
 /**
  * Custom React hook for handling event listeners in a declarative way.
- * Copied from https://github.com/VKCOM/VKUI/blob/master/packages/vkui/src/hooks/useEventListener.ts
+ * Copied from https://github.com/VKCOM/VKUI/blob/master/packages/vkui/src/hooks/use-event-listener.ts
  * */
 export function useEventListener<
   E extends Event,

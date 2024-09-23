@@ -1,11 +1,9 @@
-// @index('./**/*.ts', f => `export * from '${f.path}'`)
-export * from "./useAppRootContext";
-export * from "./useEnhancedEffect";
-export * from "./useEnsureControl";
-export * from "./useEventListener";
-export * from "./useExternalRefs";
-export * from "./useGlobalClicks";
-export * from "./useObjectMemo";
-export * from "./usePlatform";
-export * from "./useTimeout";
-// @endindex
+export * from "./use-app-root-context";
+export * from "./use-enhanced-effect";
+export * from "./use-ensure-control";
+export * from "./use-event-listener";
+export * from "./use-external-refs";
+export * from "./use-global-clicks";
+export * from "./use-object-memo";
+export * from "./use-platform";
+export * from "./use-timeout";

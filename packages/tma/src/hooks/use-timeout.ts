@@ -2,7 +2,7 @@
 
 import { useCallback, useRef } from "react";
 
-import { useEnhancedEffect } from "@/hooks/useEnhancedEffect";
+import { useEnhancedEffect } from "./use-enhanced-effect";
 
 export const useTimeout = (callbackFunction: () => void, duration: number) => {
   const options = useRef({ callbackFunction, duration });

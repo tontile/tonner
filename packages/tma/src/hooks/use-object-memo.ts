@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 
-import { isEqual } from "@/helpers/equal";
+import { isEqual } from "../helpers/equal";
 
 export const useObjectMemo = <T>(object: T): T => {
   const cache = useRef(object);

@@ -2,7 +2,7 @@
 
 import { type MutableRefObject, type Ref, useMemo, useRef } from "react";
 
-import { setRef } from "@/helpers/react/refs";
+import { setRef } from "../helpers/react/refs";
 
 export function useExternRef<T>(
   ...externRefs: Array<Ref<T> | undefined | false>

@@ -1,8 +1,8 @@
 "use client";
 
-import { useAppRootContext } from "@/hooks/useAppRootContext";
+import { useAppRootContext } from "./use-app-root-context";
 
-import type { AppRootContextInterface } from "@/components/service/AppRoot/AppRootContext";
+import type { AppRootContextInterface } from "../components/service/app-root/app-root-context";
 
 export const usePlatform = (): NonNullable<
   AppRootContextInterface["platform"]

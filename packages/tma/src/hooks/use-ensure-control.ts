@@ -11,8 +11,8 @@ import {
   useState,
 } from "react";
 
-import { isFunction } from "@/helpers/fuctions";
-import { useEnhancedEffect } from "@/hooks/useEnhancedEffect";
+import { isFunction } from "../helpers/fuctions";
+import { useEnhancedEffect } from "./use-enhanced-effect";
 
 export interface UseCustomEnsuredControlProps<V> {
   value?: V;
@@ -58,7 +58,7 @@ export function useCustomEnsuredControl<V = any>({
         return;
       }
 
-      onChangeProp && onChangeProp(nextValue);
+      onChangeProp?.(nextValue);
       !isControlled && setLocalValue(nextValue);
     },
     [disabled, isControlled, onChangeProp],

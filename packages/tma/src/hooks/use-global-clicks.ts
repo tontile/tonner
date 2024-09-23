@@ -1,6 +1,6 @@
 import type { RefObject } from "react";
 
-import { useEnhancedEffect } from "@/hooks/useEnhancedEffect";
+import { useEnhancedEffect } from "./use-enhanced-effect";
 
 import { isElement } from "@floating-ui/utils/dom";
 
