@@ -7,9 +7,11 @@ import { getTelegramData } from "@/helpers/telegram";
 import {
   AppRootContext,
   type AppRootContextInterface,
-} from "../AppRootContext";
-import { getBrowserAppearanceSubscriber } from "./helpers/getBrowserAppearanceSubscriber";
-import { getInitialAppearance } from "./helpers/getInitialAppearance";
+} from "./app-root-context";
+import {
+  getBrowserAppearanceSubscriber,
+  getInitialAppearance,
+} from "./app-root.helpers";
 
 export const useAppearance = (
   appearanceProp?: AppRootContextInterface["appearance"],

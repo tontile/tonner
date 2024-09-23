@@ -1,19 +1,19 @@
 "use client";
 
 import { type HTMLAttributes, forwardRef } from "react";
-import styles from "./AppRoot.module.css";
+import styles from "../app-root/app-root.module.css";
 
-import { classNames } from "@/helpers/classNames";
+import { classNames } from "@/helpers/class-names";
 import { multipleRef } from "@/helpers/react/refs";
-import { useObjectMemo } from "@/hooks/useObjectMemo";
+import { useObjectMemo } from "@/hooks/use-object-memo";
 
 import {
   AppRootContext,
   type AppRootContextInterface,
-} from "@/components/service/AppRoot/AppRootContext";
-import { useAppearance } from "@/components/service/AppRoot/hooks/useAppearance";
-import { usePlatform } from "./hooks/usePlatform";
-import { usePortalContainer } from "./hooks/usePortalContainer";
+} from "./app-root-context";
+import { useAppearance } from "./use-appearance";
+import { usePlatform } from "./use-platform";
+import { usePortalContainer } from "./use-portal-container";
 
 export interface AppRootProps extends HTMLAttributes<HTMLDivElement> {
   /** Application platform, determined automatically if nothing passed */

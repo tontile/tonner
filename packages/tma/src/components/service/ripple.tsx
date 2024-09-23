@@ -1,4 +1,4 @@
-import styles from "./Ripple.module.css";
+import styles from "./ripple.module.css";
 
 interface Wave {
   x: number;

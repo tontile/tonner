@@ -3,9 +3,9 @@ import React, {
   type ElementType,
   forwardRef,
 } from "react";
-import styles from "./VisuallyHidden.module.css";
+import styles from "./visually-hidden.module.css";
 
-import { classNames } from "@/helpers/classNames";
+import { classNames } from "@/helpers/class-names";
 
 export interface VisuallyHiddenProps<T> extends AllHTMLAttributes<T> {
   Component?: ElementType;

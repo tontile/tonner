@@ -2,9 +2,9 @@
 
 import { type PointerEventHandler, useMemo, useState } from "react";
 
-import { useTimeout } from "@/hooks/useTimeout";
+import { useTimeout } from "@/hooks/use-timeout";
 
-import type { Wave } from "../types/Wave";
+import type { Wave } from "./ripple.types";
 
 const RIPPLE_DELAY = 70;
 const WAVE_LIVE = 225;

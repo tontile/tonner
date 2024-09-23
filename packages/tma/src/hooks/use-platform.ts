@@ -2,7 +2,7 @@
 
 import { useAppRootContext } from "./use-app-root-context";
 
-import type { AppRootContextInterface } from "../components/service/app-root/app-root-context";
+import type { AppRootContextInterface } from "../components/service/app-root-context";
 
 export const usePlatform = (): NonNullable<
   AppRootContextInterface["platform"]

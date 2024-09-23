@@ -1,6 +1,7 @@
 import { canUseDOM } from "@/helpers/dom";
+import { getTelegramData } from "@/helpers/telegram";
 
-import type { AppRootContextInterface } from "@/components/service/AppRoot/AppRootContext";
+import type { AppRootContextInterface } from "./app-root-context";
 
 export const getBrowserAppearanceSubscriber = (
   setAppearance: (
@@ -18,4 +19,29 @@ export const getBrowserAppearanceSubscriber = (
 
   mediaQuery.addEventListener("change", listener);
   return () => mediaQuery.removeEventListener("change", listener);
+};
+
+export const getInitialPlatform = () => {
+  const telegramData = getTelegramData();
+  if (!telegramData) {
+    return "base";
+  }
+
+  if (["ios", "macos"].includes(telegramData.platform)) {
+    return "ios";
+  }
+
+  return "base";
+};
+
+export const getInitialAppearance = () => {
+  if (
+    canUseDOM &&
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    return "dark";
+  }
+
+  return "light";
 };

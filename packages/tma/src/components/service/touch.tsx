@@ -11,8 +11,8 @@ import {
   useRef,
 } from "react";
 
-import { useEnhancedEffect } from "@/hooks/useEnhancedEffect";
-import { useEventListener } from "@/hooks/useEventListener";
+import { useEnhancedEffect } from "@/hooks/use-enhanced-effect";
+import { useEventListener } from "@/hooks/use-event-listener";
 
 import {
   coordX,
@@ -20,8 +20,8 @@ import {
   getSupportedEvents,
   initGesture,
   touchEnabled,
-} from "./helpers/touch";
-import type { CustomTouchEvent, Gesture } from "./helpers/types";
+} from "./touch.helpers";
+import type { CustomTouchEvent, Gesture } from "./touch.types";
 
 export interface TouchProps extends AllHTMLAttributes<HTMLElement> {
   usePointerHover?: boolean;
@@ -88,15 +88,15 @@ export const Touch = ({
     stopPropagation && e.stopPropagation();
     handlers.forEach((cb) => {
       const duration = Date.now() - (gesture.current?.startT?.getTime() ?? 0);
-      cb && cb({ ...(gesture.current as Gesture), duration, originalEvent: e });
+      cb?.({ ...(gesture.current as Gesture), duration, originalEvent: e });
     });
   };
 
   const listenerParams = { capture: useCapture, passive: false };
   const listeners = [
-    useEventListener(events[1], onMove, listenerParams),
-    useEventListener(events[2], onEnd, listenerParams),
-    useEventListener(events[3], onEnd, listenerParams),
+    useEventListener(events[1]!, onMove, listenerParams),
+    useEventListener(events[2]!, onEnd, listenerParams),
+    useEventListener(events[3]!, onEnd, listenerParams),
   ];
 
   const subscribe = (el: HTMLElement | Document | null | undefined) => {
@@ -120,7 +120,7 @@ export const Touch = ({
     onLeave,
   );
   const startHandler = useEventListener(
-    events[0],
+    events[0]!,
     (e: CustomTouchEvent) => {
       gesture.current = initGesture(coordX(e), coordY(e));
 
@@ -256,7 +256,7 @@ export const Touch = ({
    */
   const postGestureClick: typeof onClickCapture = (e) => {
     if (!didSlide.current) {
-      onClickCapture && onClickCapture(e);
+      onClickCapture?.(e);
       return;
     }
 
@@ -264,7 +264,7 @@ export const Touch = ({
       e.stopPropagation();
       e.preventDefault();
     } else {
-      onClickCapture && onClickCapture(e);
+      onClickCapture?.(e);
     }
 
     didSlide.current = false;

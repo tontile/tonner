@@ -1,13 +1,13 @@
 "use client";
 
 import { type AllHTMLAttributes, type ElementType, forwardRef } from "react";
-import styles from "./Tappable.module.css";
+import styles from "./tappable.module.css";
 
-import { classNames } from "@/helpers/classNames";
-import { usePlatform } from "@/hooks/usePlatform";
+import { classNames } from "@/helpers/class-names";
+import { usePlatform } from "@/hooks/use-platform";
 
-import { Ripple } from "./components/Ripple";
-import { useRipple } from "./components/Ripple/hooks/useRipple";
+import { Ripple } from "./ripple";
+import { useRipple } from "./use-ripple";
 
 export interface TappableProps extends AllHTMLAttributes<HTMLElement> {
   /** HTML Tag */

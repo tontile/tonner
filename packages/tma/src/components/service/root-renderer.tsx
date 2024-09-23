@@ -1,7 +1,7 @@
 import { type ReactNode, isValidElement } from "react";
 import { createPortal } from "react-dom";
 
-import { useAppRootContext } from "@/hooks/useAppRootContext";
+import { useAppRootContext } from "@/hooks/use-app-root-context";
 
 export interface RootRendererProps {
   children?: ReactNode;

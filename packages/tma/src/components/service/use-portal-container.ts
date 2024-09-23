@@ -5,7 +5,7 @@ import { useContext, useRef } from "react";
 import {
   AppRootContext,
   type AppRootContextInterface,
-} from "../AppRootContext";
+} from "./app-root-context";
 
 export const usePortalContainer = (
   portalContainer?: AppRootContextInterface["portalContainer"],

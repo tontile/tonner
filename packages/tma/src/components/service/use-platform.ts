@@ -3,8 +3,8 @@ import { useContext } from "react";
 import {
   AppRootContext,
   type AppRootContextInterface,
-} from "../AppRootContext";
-import { getInitialPlatform } from "./helpers/getInitialPlatform";
+} from "./app-root-context";
+import { getInitialPlatform } from "./app-root.helpers";
 
 export const usePlatform = (
   platform?: AppRootContextInterface["platform"],

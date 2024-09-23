@@ -1,7 +1,7 @@
 import type { AllHTMLAttributes, ElementType } from "react";
-import styles from "./HorizontalScroll.module.css";
+import styles from "./horizontal-scroll.module.css";
 
-import { classNames } from "@/helpers/classNames";
+import { classNames } from "@/helpers/class-names";
 
 export interface HorizontalScrollProps extends AllHTMLAttributes<HTMLElement> {
   Component?: ElementType;
