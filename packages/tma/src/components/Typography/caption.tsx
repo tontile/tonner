@@ -1,8 +1,7 @@
-import styles from "./Caption.module.css";
+import styles from "../caption/caption.module.css";
+import { Typography, type TypographyProps } from "./typography";
 
-import { classNames } from "@/helpers/classNames";
-
-import { Typography, type TypographyProps } from "..";
+import { classNames } from "@/helpers/class-names";
 
 type CaptionLevel = "1" | "2";
 
@@ -12,8 +11,8 @@ export interface CaptionProps extends Omit<TypographyProps, "plain"> {
 }
 
 const captionLevelStyles: Record<CaptionLevel, string> = {
-  "1": styles["wrapper--1"],
-  "2": styles["wrapper--2"],
+  "1": styles["wrapper--1"]!,
+  "2": styles["wrapper--2"]!,
 };
 
 /**

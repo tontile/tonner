@@ -1,9 +1,8 @@
 import { forwardRef } from "react";
-import styles from "./Subheadline.module.css";
+import styles from "./subheadline.module.css";
 
-import { classNames } from "@/helpers/classNames";
-
-import { Typography, type TypographyProps } from "..";
+import { classNames } from "@/helpers/class-names";
+import { Typography, type TypographyProps } from "./typography";
 
 type SubheadlineLevel = "1" | "2";
 
@@ -13,8 +12,8 @@ export interface SubheadlineProps extends TypographyProps {
 }
 
 const subheadlineLevelStyles: Record<SubheadlineLevel, string> = {
-  "1": styles["wrapper--1"],
-  "2": styles["wrapper--2"],
+  "1": styles["wrapper--1"]!,
+  "2": styles["wrapper--2"]!,
 };
 
 /**

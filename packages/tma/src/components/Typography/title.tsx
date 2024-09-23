@@ -1,9 +1,8 @@
 import type { ElementType } from "react";
-import styles from "./Title.module.css";
+import styles from "./title.module.css";
 
-import { classNames } from "@/helpers/classNames";
-
-import { Typography, type TypographyProps } from "..";
+import { classNames } from "@/helpers/class-names";
+import { Typography, type TypographyProps } from "./typography";
 
 type TitleLevel = "1" | "2" | "3";
 
@@ -19,9 +18,9 @@ const titleLevelTags: Record<TitleLevel, ElementType> = {
 };
 
 const titleLevelStyles: Record<TitleLevel, string> = {
-  "1": styles["wrapper--1"],
-  "2": styles["wrapper--2"],
-  "3": styles["wrapper--3"],
+  "1": styles["wrapper--1"]!,
+  "2": styles["wrapper--2"]!,
+  "3": styles["wrapper--3"]!,
 };
 
 /**

@@ -1,8 +1,7 @@
-import styles from "./LargeTitle.module.css";
+import styles from "./large-title.module.css";
+import { Typography, type TypographyProps } from "./typography";
 
-import { classNames } from "@/helpers/classNames";
-
-import { Typography, type TypographyProps } from "..";
+import { classNames } from "@/helpers/class-names";
 
 export type LargeTitleProps = TypographyProps;
 

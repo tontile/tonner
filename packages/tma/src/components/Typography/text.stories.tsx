@@ -1,7 +1,7 @@
 import { hideControls } from "@/storybook/controls";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Text } from ".";
+import { Text } from "./text";
 
 const meta = {
   title: "Typography/Text",

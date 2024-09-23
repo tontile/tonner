@@ -1,8 +1,8 @@
-import styles from "./Headline.module.css";
+import styles from "../headline/headline.module.css";
 
-import { classNames } from "@/helpers/classNames";
+import { classNames } from "@/helpers/class-names";
 
-import { Typography, type TypographyProps } from "..";
+import { Typography, type TypographyProps } from "./typography";
 
 export type HeadlineProps = TypographyProps;
 

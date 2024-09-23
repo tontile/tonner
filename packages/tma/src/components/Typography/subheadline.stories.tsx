@@ -1,7 +1,7 @@
 import { hideControls } from "@/storybook/controls";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Subheadline } from ".";
+import { Subheadline } from "./subheadline";
 
 const meta = {
   title: "Typography/Subheadline",

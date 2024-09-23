@@ -1,9 +1,8 @@
 import { forwardRef } from "react";
-import styles from "./Text.module.css";
+import styles from "./text.module.css";
 
-import { classNames } from "@/helpers/classNames";
-
-import { Typography, type TypographyProps } from "..";
+import { classNames } from "@/helpers/class-names";
+import { Typography, type TypographyProps } from "./typography";
 
 export type TextProps = Omit<TypographyProps, "plain">;
 
