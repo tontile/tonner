@@ -1,4 +1,4 @@
-import { canUseDOM } from "@/helpers/dom";
+import { canUseDOM } from "./dom";
 
 import type { Telegram } from "@twa-dev/types";
 
