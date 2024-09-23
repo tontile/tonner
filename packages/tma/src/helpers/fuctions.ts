@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { canUseDOM } from "@/helpers/dom";
+import { canUseDOM } from "@/helpers";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function isFunction(value: unknown): value is Function {

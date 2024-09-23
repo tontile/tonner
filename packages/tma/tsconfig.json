@@ -6,7 +6,7 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["**/*.tsx", "**/*.ts", "**/*.js"],
+  "include": ["**/*.tsx", "**/*.ts"],
   "exclude": ["node_modules"],
   "files": ["./types/declarations.d.ts"]
 }

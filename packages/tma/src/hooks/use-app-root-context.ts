@@ -1,7 +1,7 @@
 "use client";
 
+import { AppRootContext } from "@/components/service/app-root/app-root-context";
 import { useContext } from "react";
-import { AppRootContext } from "../components/service/app-root-context";
 
 export const useAppRootContext = () => {
   const appRootContext = useContext(AppRootContext);

@@ -1,6 +1,7 @@
-// export * from "./CircularProgress";
-// export * from "./Progress";
-// export * from "./Skeleton";
-// export * from "./Snackbar";
-// export * from "./Spinner";
-// export * from "./Spoiler";
+// @index(['./*.{ts,tsx}', './*/index.{ts,tsx}', '!./*.stories.{ts,tsx}'], f => `export * from '${f.path.replace(/\/index$/, '')}'`)
+export * from "./circular-progress";
+export * from "./progress";
+export * from "./skeleton";
+export * from "./snackbar";
+export * from "./spinner";
+// @endindex

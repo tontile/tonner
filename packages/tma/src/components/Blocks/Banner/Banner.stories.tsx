@@ -1,10 +1,10 @@
 import { hideControls, setControlsTypes } from "@/storybook/controls";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Image as UIImage } from "@/components/blocks/Image";
-import { List } from "@/components/blocks/List";
-import { Banner } from ".";
-import { Button } from "../Button";
+import { Image as UIImage } from "@/components/blocks/image";
+import { List } from "@/components/blocks/list";
+import { Button } from "../button";
+import { Banner } from "./banner";
 
 const meta = {
   title: "Blocks/Banner",

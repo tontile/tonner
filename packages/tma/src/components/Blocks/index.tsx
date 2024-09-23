@@ -1,18 +1,19 @@
-// export * from "./Accordion";
-// export * from "./Avatar";
-// export * from "./AvatarStack";
-// export * from "./Badge";
-// export * from "./Banner";
-// export * from "./Blockquote";
-// export * from "./Button";
-// export * from "./Card";
-// export * from "./Cell";
-// export * from "./IconButton";
-// export * from "./IconContainer";
-// export * from "./Image";
-// export * from "./InlineButtons";
-// export * from "./List";
-// export * from "./Placeholder";
-// export * from "./Section";
-// export * from "./Steps";
-// export * from "./Timeline";
+// @index(['./*.{ts,tsx}', './*/index.{ts,tsx}'], f => `export * from '${f.path.replace(/\/index$/, '')}'`)
+export * from "./accordion";
+export * from "./avatar-stack";
+export * from "./avatar";
+export * from "./badge";
+export * from "./banner";
+export * from "./blockquote";
+export * from "./button";
+export * from "./card";
+export * from "./cell";
+export * from "./icon-button";
+export * from "./icon-container";
+export * from "./image";
+export * from "./list";
+export * from "./placeholder";
+export * from "./section";
+export * from "./steps";
+export * from "./timeline";
+// @endindex

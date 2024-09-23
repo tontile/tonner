@@ -1,16 +1,18 @@
-// export * from "./Checkbox";
-// export * from "./Chip";
-// export * from "./ColorInput";
-// export * from "./FileInput";
-// export * from "./FormInput";
-// export * from "./Input";
-// export * from "./Multiselect";
-// export * from "./Multiselectable";
-// export * from "./PinInput";
-// export * from "./Radio";
-// export * from "./Rating";
-// export * from "./Select";
-// export * from "./Selectable";
-// export * from "./Slider";
-// export * from "./Switch";
-// export * from "./Textarea";
+// @index(['./*.{ts,tsx}', './*/index.{ts,tsx}', '!./*.stories.{ts,tsx}'], f => `export * from '${f.path.replace(/\/index$/, '')}'`)
+export * from "./checkbox";
+export * from "./chip";
+export * from "./color-input";
+export * from "./file-input";
+export * from "./form-input";
+export * from "./input";
+export * from "./multiselect";
+export * from "./multiselectable";
+export * from "./pin-input";
+export * from "./radio";
+export * from "./rating";
+export * from "./select";
+export * from "./selectable";
+export * from "./slider";
+export * from "./switch";
+export * from "./textarea";
+// @endindex

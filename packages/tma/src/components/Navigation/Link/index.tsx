@@ -1,12 +1,3 @@
-import type { AnchorHTMLAttributes } from "react";
-import styles from "./Link.module.css";
-
-import { classNames } from "@/helpers/classNames";
-
-export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {}
-
-export const Link = ({ className, children, ...restProps }: LinkProps) => (
-  <a className={classNames(styles.wrapper, className)} {...restProps}>
-    {children}
-  </a>
-);
+// @index(['./*.{ts,tsx}', './*/index.{ts,tsx}', '!./*.stories.{ts,tsx}'], f => `export * from '${f.path.replace(/\/index$/, '')}'`)
+export * from "./link";
+// @endindex

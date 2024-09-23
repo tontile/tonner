@@ -3,10 +3,10 @@ import { type MouseEvent, useState } from "react";
 import { hideControls } from "@/storybook/controls";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Placeholder } from "@/components/blocks/Placeholder";
-import { Touch } from "@/components/service/Touch";
-import { Caption } from "@/components/typography/Caption";
-import { Popper } from ".";
+import { Placeholder } from "@/components/blocks/placeholder";
+import { Touch } from "@/components/service/touch";
+import { Caption } from "@/components/typography/caption";
+import { Popper } from "./popper";
 
 const meta = {
   title: "Overlays/Popper",

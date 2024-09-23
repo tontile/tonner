@@ -3,8 +3,8 @@ import { useRef, useState } from "react";
 import { hideControls } from "@/storybook/controls";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Button } from "@/components/blocks/Button";
-import { Tooltip } from ".";
+import { Button } from "@/components/blocks/button";
+import { Tooltip } from "./tooltip";
 
 const meta = {
   title: "Overlays/Tooltip",
